@@ -1,0 +1,33 @@
+# Ralph Progress Log - Claru Pillar Pages
+
+Project: Build PREPARE, ENRICH, and VALIDATE pillar pages
+Branch: ralph/pillar-pages
+Started: 2026-01-13
+
+## Reference Implementation
+- /src/app/pillars/acquire/page.tsx - Gold standard for all pillar pages
+- /src/app/pillars/acquire/layout.tsx - Metadata and JSON-LD schema pattern
+
+## Key Patterns
+- Citation component for inline source links with ExternalLink icon
+- CapabilityCard component for capabilities grid
+- FAQItem component accepts React.ReactNode for JSX answers
+- Page flow: Hero → Problem → Market Context → Proof → Capabilities → Process → Use Cases → FAQ → CTA
+
+---
+
+## US-001: Create PREPARE layout.tsx with metadata and JSON-LD schema
+- Status: COMPLETE
+- Created /src/app/pillars/prepare/layout.tsx
+- Metadata with title under 60 chars, description 140-160 chars
+- Keywords array covering data preparation, ML datasets, deduplication, multimodal alignment
+- JSON-LD schema with Service, BreadcrumbList, and FAQPage (5 questions)
+- Build passes
+
+### Learnings:
+- Follow exact structure from acquire/layout.tsx
+- Keep FAQ questions in JSON-LD consistent with page content
+- Title must be under 60 chars for SEO
+
+---
+
