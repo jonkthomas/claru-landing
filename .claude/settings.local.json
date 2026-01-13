@@ -35,7 +35,9 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(vercel --yes)",
-      "Bash(git push)"
+      "Bash(git push)",
+      "Bash(vercel:*)",
+      "mcp__playwright__browser_console_messages"
     ]
   }
 }
