@@ -466,7 +466,7 @@
         "Typecheck passes"
       ],
       "priority": 25,
-      "passes": false,
+      "passes": true,
       "notes": "Update acquire, prepare, enrich, validate pages"
     },
     {
@@ -481,7 +481,7 @@
         "Cross-links between pages work correctly"
       ],
       "priority": 26,
-      "passes": false,
+      "passes": true,
       "notes": "Final verification before merge"
     }
   ]

@@ -910,8 +910,65 @@ export default function PreparePage() {
         </div>
       </section>
 
+      {/* Deep Dive Section */}
+      <section className="py-16 bg-[var(--bg-secondary)]/30">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto"
+          >
+            <span className="font-mono text-sm text-[var(--accent-primary)] mb-4 block">
+              {"// DEEP DIVE"}
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold mb-8">
+              Explore Our Preparation Services
+            </h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <Link
+                href="/pillars/prepare/deduplication"
+                className="p-6 rounded-xl border border-[var(--border-subtle)] hover:border-[var(--accent-primary)]/50 transition-all group bg-[var(--bg-primary)]"
+              >
+                <Layers className="w-8 h-8 text-[var(--accent-primary)] mb-4" />
+                <h3 className="font-semibold mb-2 group-hover:text-[var(--accent-primary)] transition-colors">
+                  Deduplication
+                </h3>
+                <p className="text-sm text-[var(--text-tertiary)]">
+                  Multi-level duplicate removal at trillion-token scale
+                </p>
+              </Link>
+              <Link
+                href="/pillars/prepare/multimodal-alignment"
+                className="p-6 rounded-xl border border-[var(--border-subtle)] hover:border-[var(--accent-primary)]/50 transition-all group bg-[var(--bg-primary)]"
+              >
+                <Video className="w-8 h-8 text-[var(--accent-primary)] mb-4" />
+                <h3 className="font-semibold mb-2 group-hover:text-[var(--accent-primary)] transition-colors">
+                  Multimodal Alignment
+                </h3>
+                <p className="text-sm text-[var(--text-tertiary)]">
+                  Cross-modal synchronization for video-text and image-audio
+                </p>
+              </Link>
+              <Link
+                href="/pillars/prepare/quality-scoring"
+                className="p-6 rounded-xl border border-[var(--border-subtle)] hover:border-[var(--accent-primary)]/50 transition-all group bg-[var(--bg-primary)]"
+              >
+                <Filter className="w-8 h-8 text-[var(--accent-primary)] mb-4" />
+                <h3 className="font-semibold mb-2 group-hover:text-[var(--accent-primary)] transition-colors">
+                  Quality Scoring
+                </h3>
+                <p className="text-sm text-[var(--text-tertiary)]">
+                  Multi-signal quality filtering with diversity preservation
+                </p>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Use Cases Section */}
-      <section className="py-20 bg-[var(--bg-secondary)]/30">
+      <section className="py-20">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
