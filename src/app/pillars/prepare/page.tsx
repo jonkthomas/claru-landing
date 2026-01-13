@@ -449,12 +449,40 @@ export default function PreparePage() {
             <Logo size="sm" />
           </Link>
           <nav className="hidden md:flex items-center gap-8">
-            <Link
-              href="/#services"
-              className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
-            >
-              Services
-            </Link>
+            <div className="relative group">
+              <span className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer flex items-center gap-1">
+                Services
+                <ChevronRight className="w-3 h-3 rotate-90 group-hover:rotate-[270deg] transition-transform" />
+              </span>
+              <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                <div className="bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-lg p-2 min-w-[160px] shadow-xl">
+                  <Link
+                    href="/pillars/acquire"
+                    className="block px-3 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded hover:bg-[var(--bg-primary)]"
+                  >
+                    Acquire
+                  </Link>
+                  <Link
+                    href="/pillars/prepare"
+                    className="block px-3 py-2 text-sm text-[var(--accent-primary)] rounded hover:bg-[var(--bg-primary)]"
+                  >
+                    Prepare
+                  </Link>
+                  <Link
+                    href="/pillars/enrich"
+                    className="block px-3 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded hover:bg-[var(--bg-primary)]"
+                  >
+                    Enrich
+                  </Link>
+                  <Link
+                    href="/pillars/validate"
+                    className="block px-3 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded hover:bg-[var(--bg-primary)]"
+                  >
+                    Validate
+                  </Link>
+                </div>
+              </div>
+            </div>
             <Link
               href="/#capabilities"
               className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
@@ -1190,6 +1218,53 @@ export default function PreparePage() {
               Discuss Your Data Requirements <ArrowRight className="w-4 h-4" />
             </Button>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Related Services */}
+      <section className="py-12 border-t border-[var(--border-subtle)]">
+        <div className="container">
+          <p className="text-sm font-mono text-[var(--accent-primary)] mb-4">
+            // RELATED SERVICES
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Link
+              href="/pillars/acquire"
+              className="p-4 rounded-lg border border-[var(--border-subtle)] hover:border-[var(--accent-primary)]/30 transition-colors group"
+            >
+              <span className="text-sm text-[var(--text-tertiary)]">01</span>
+              <h3 className="font-semibold group-hover:text-[var(--accent-primary)] transition-colors">
+                Acquire
+              </h3>
+              <p className="text-sm text-[var(--text-tertiary)]">
+                Custom data collection & licensing
+              </p>
+            </Link>
+            <Link
+              href="/pillars/enrich"
+              className="p-4 rounded-lg border border-[var(--border-subtle)] hover:border-[var(--accent-primary)]/30 transition-colors group"
+            >
+              <span className="text-sm text-[var(--text-tertiary)]">03</span>
+              <h3 className="font-semibold group-hover:text-[var(--accent-primary)] transition-colors">
+                Enrich
+              </h3>
+              <p className="text-sm text-[var(--text-tertiary)]">
+                Expert annotation & RLHF
+              </p>
+            </Link>
+            <Link
+              href="/pillars/validate"
+              className="p-4 rounded-lg border border-[var(--border-subtle)] hover:border-[var(--accent-primary)]/30 transition-colors group"
+            >
+              <span className="text-sm text-[var(--text-tertiary)]">04</span>
+              <h3 className="font-semibold group-hover:text-[var(--accent-primary)] transition-colors">
+                Validate
+              </h3>
+              <p className="text-sm text-[var(--text-tertiary)]">
+                Red teaming & quality assurance
+              </p>
+            </Link>
+          </div>
         </div>
       </section>
 

@@ -328,7 +328,7 @@
         "Verify in browser using dev-browser skill - navigate between all pillars"
       ],
       "priority": 16,
-      "passes": false,
+      "passes": true,
       "notes": "Keep navigation consistent across all pillar pages"
     },
     {
@@ -343,7 +343,7 @@
         "Typecheck passes"
       ],
       "priority": 17,
-      "passes": false,
+      "passes": true,
       "notes": "Final verification before merge"
     }
   ]

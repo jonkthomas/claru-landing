@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Sparkles,
+  Database,
   Video,
-  Users,
-  Shield,
+  Globe,
+  Cpu,
+  FileCheck,
   ChevronRight,
   ArrowRight,
   ExternalLink,
-  MessageSquare,
 } from "lucide-react";
 import Link from "next/link";
 import Logo from "@/app/components/ui/Logo";
@@ -46,7 +46,7 @@ function CapabilityCard({
   details,
   index,
 }: {
-  icon: typeof Sparkles;
+  icon: typeof Database;
   title: string;
   description: string;
   details: string[];
@@ -122,7 +122,7 @@ function FAQItem({
   );
 }
 
-export default function EnrichPage() {
+export default function AcquirePage() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -133,303 +133,289 @@ export default function EnrichPage() {
 
   const capabilities = [
     {
-      icon: Sparkles,
-      title: "RLHF & Preference Data",
-      description: "Human rankings that teach your model what good looks like",
-      details: [
-        "Pairwise preference comparisons",
-        "Reward model training data",
-        "Expert judgment at scale",
-        "Multi-turn conversation evaluation",
-      ],
-    },
-    {
       icon: Video,
-      title: "Frame-Level Video Annotation",
-      description: "Temporal labeling that captures how actions unfold",
+      title: "Human Data Collection",
+      description: "Capture real-world data through expert human collectors",
       details: [
-        "Temporal action segmentation",
-        "Object tracking across frames",
-        "Physics-aware motion annotation",
-        "Multi-resolution labeling",
+        "Egocentric video capture at scale",
+        "Physical world interaction data",
+        "Expert-guided data gathering",
+        "Multi-environment scenario coverage",
       ],
     },
     {
-      icon: Users,
-      title: "Expert Domain Annotation",
-      description: "PhD-level specialists for high-stakes domains",
+      icon: Globe,
+      title: "Web-Scale Harvesting",
+      description: "Ethically sourced, properly licensed internet-scale data",
       details: [
-        "STEM: math, physics, chemistry, biology",
-        "Medical: licensed physicians, radiologists",
-        "Legal: practicing attorneys, compliance experts",
-        "Software: senior engineers, security researchers",
+        "Adaptive scraping infrastructure",
+        "Copyright-safe content licensing",
+        "Structured data extraction",
+        "Multi-format support",
       ],
     },
     {
-      icon: Shield,
-      title: "Red Teaming & Adversarial",
-      description: "Find vulnerabilities before your users do",
+      icon: Cpu,
+      title: "Synthetic Generation",
+      description: "AI-augmented data creation with human validation",
       details: [
-        "Jailbreak attempt generation",
-        "Safety boundary testing",
-        "Prompt injection probing",
-        "Culturally-aware adversarial testing",
+        "Unreal Engine environments",
+        "Generative AI outputs",
+        "Physics-accurate simulations",
+        "Human quality validation",
+      ],
+    },
+    {
+      icon: FileCheck,
+      title: "Data Licensing",
+      description: "Navigate complex data rights with full provenance",
+      details: [
+        "Content rights negotiation",
+        "Provenance documentation",
+        "Compliance frameworks",
+        "Audit-ready data trails",
       ],
     },
   ];
 
   const faqs: { question: string; answer: React.ReactNode }[] = [
     {
-      question:
-        "What makes expert annotators different from crowdsourced workers?",
+      question: "What types of data can Claru acquire?",
       answer: (
         <>
           <p className="mb-3">
-            The difference is domain expertise, not just accuracy. Crowdsourced
-            workers can label objects in images reliably. But when the task
-            requires{" "}
-            <strong className="text-[var(--text-primary)]">judgment</strong>
-            —ranking the quality of two code explanations, identifying medical
-            misinformation, evaluating legal reasoning—generic workers fail.
+            We acquire four categories of training data, each with different
+            collection methodologies:
           </p>
           <ul className="list-none space-y-2 mb-3">
             <li>
               <strong className="text-[var(--text-primary)]">
-                Credentials matter:
+                Human-collected data:
               </strong>{" "}
-              Our STEM annotators hold PhDs from research institutions. Medical
-              annotators are licensed physicians. Legal annotators are
-              practicing attorneys. These aren&apos;t marketing claims—we verify
-              credentials.
+              Egocentric video from wearable cameras, physical manipulation
+              recordings, task demonstrations with teleoperation rigs—data that
+              requires trained collectors in real environments.
             </li>
             <li>
               <strong className="text-[var(--text-primary)]">
-                Nuance detection:
+                Web-scale harvesting:
               </strong>{" "}
-              Expert annotators catch subtle errors that crowdsourced workers
-              miss. A physics PhD will flag incorrect units or violated
-              conservation laws. A practicing attorney will identify
-              inapplicable precedents.
+              Structured extraction from public sources with proper licensing,
+              including text corpora, image-caption pairs, and video datasets
+              with copyright clearance.
             </li>
             <li>
               <strong className="text-[var(--text-primary)]">
-                RLHF quality:
+                Synthetic generation:
               </strong>{" "}
-              <Citation href="https://www.perle.ai/resources/2025-ai-training-data-trends-the-future-of-domain-specific-ai-rlhf-and-custom-tooling">
-                RLHF data from domain experts
-              </Citation>{" "}
-              produces better reward models because experts consistently rank
-              responses based on actual quality, not surface features.
+              Physics-accurate data from Unreal Engine, Unity, and NVIDIA
+              Omniverse, plus AI-generated content validated by human reviewers.
+            </li>
+            <li>
+              <strong className="text-[var(--text-primary)]">
+                Licensed content:
+              </strong>{" "}
+              Negotiated access to proprietary datasets from publishers, content
+              creators, and enterprise data holders.
             </li>
           </ul>
           <p>
-            Expert annotation costs more per label. But lower-quality data
-            requires more labels to achieve the same model performance—and often
-            caps out at worse performance regardless of scale.
+            All data includes full provenance documentation—source, collection
+            method, processing steps, and license terms.
           </p>
         </>
       ),
     },
     {
-      question: "How do you ensure annotation quality at scale?",
+      question: "How do you ensure data quality during acquisition?",
       answer: (
         <>
           <p className="mb-3">
-            Quality at scale requires systems, not just good intentions. We use
-            multiple overlapping quality controls:
+            Quality issues compound quickly at scale. A 1% error rate across 10
+            million samples means 100,000 bad examples polluting your training
+            distribution.{" "}
+            <Citation href="https://lakefs.io/blog/data-quality-for-ml-model-development-and-training/">
+              Poor data quality is one of the top reasons AI projects fail
+            </Citation>
+            . We catch problems early through multi-stage validation:
           </p>
           <ul className="list-none space-y-2 mb-3">
             <li>
               <strong className="text-[var(--text-primary)]">
-                Multi-annotator consensus:
+                Schema validation:
               </strong>{" "}
-              Complex tasks get multiple independent annotations. We measure
-              inter-annotator agreement (IAA) and investigate disagreements
-              rather than just majority-voting them away.
-            </li>
-            <li>
-              <strong className="text-[var(--text-primary)]">
-                Gold standard validation:
-              </strong>{" "}
-              Every batch includes pre-labeled &quot;gold&quot; examples with
-              known correct answers. Annotators who miss gold items get flagged
-              for retraining or removal.
+              Automated checks that incoming data matches expected formats,
+              resolutions, frame rates, and metadata structure.
             </li>
             <li>
               <strong className="text-[var(--text-primary)]">
                 Statistical monitoring:
               </strong>{" "}
-              We track annotation distributions in real-time. Sudden shifts in
-              label frequency often indicate annotator confusion or guideline
-              ambiguity.
+              Distribution tracking to catch drift, outliers, and anomalies
+              before they propagate.
             </li>
             <li>
               <strong className="text-[var(--text-primary)]">
-                Expert spot-checks:
+                Expert review:
               </strong>{" "}
-              Senior domain experts randomly sample annotations to catch subtle
-              quality issues that automated metrics miss.
+              Human validators sample data streams in real-time, flagging
+              quality issues and providing feedback to collectors.
+            </li>
+            <li>
+              <strong className="text-[var(--text-primary)]">
+                Completeness checks:
+              </strong>{" "}
+              Ensuring all required fields, annotations, and metadata are
+              present before data enters your pipeline.
             </li>
           </ul>
           <p>
-            Our target:{" "}
-            <Citation href="https://keymakr.com/blog/measuring-inter-annotator-agreement-building-trustworthy-datasets/">
-              85%+ inter-annotator agreement
-            </Citation>{" "}
-            for objective tasks, with full disagreement analysis for subjective
-            judgments.
+            We split deliveries into training, validation, and test sets with
+            verified non-overlap—preventing data leakage that could invalidate
+            your benchmarks.
           </p>
         </>
       ),
     },
     {
-      question: "What domains do your expert annotators cover?",
+      question: "Can you acquire data for specialized domains?",
       answer: (
         <>
           <p className="mb-3">
-            We maintain active specialist networks across high-value domains:
+            Yes. Generic crowdsourcing fails for specialized domains—you
+            can&apos;t have non-experts label medical imaging or legal
+            documents. We maintain networks of domain specialists:
           </p>
           <ul className="list-none space-y-2 mb-3">
+            <li>
+              <strong className="text-[var(--text-primary)]">Medical:</strong>{" "}
+              Board-certified physicians, radiologists, and clinical researchers
+              for diagnostic imaging, clinical notes, and medical dialogue.
+            </li>
+            <li>
+              <strong className="text-[var(--text-primary)]">Legal:</strong>{" "}
+              Licensed attorneys for contract analysis, case law annotation, and
+              regulatory compliance data.
+            </li>
             <li>
               <strong className="text-[var(--text-primary)]">
                 STEM & Technical:
               </strong>{" "}
-              PhD-level scientists for mathematics, physics, chemistry, and
-              biology. Research experience required—not just degree holders.
+              PhD-level scientists and engineers for research papers, code
+              repositories, and technical documentation.
             </li>
             <li>
-              <strong className="text-[var(--text-primary)]">Medical:</strong>{" "}
-              Board-certified physicians across specialties, radiologists for
-              imaging tasks, clinical researchers for literature review.
-            </li>
-            <li>
-              <strong className="text-[var(--text-primary)]">Legal:</strong>{" "}
-              Licensed attorneys from multiple jurisdictions for contract
-              analysis, case law annotation, and regulatory compliance.
-            </li>
-            <li>
-              <strong className="text-[var(--text-primary)]">
-                Software Engineering:
-              </strong>{" "}
-              Senior developers and security researchers for code review, bug
-              identification, and technical documentation.
-            </li>
-            <li>
-              <strong className="text-[var(--text-primary)]">Finance:</strong>{" "}
-              CFA charterholders, quantitative analysts, and compliance
-              professionals for financial data annotation.
+              <strong className="text-[var(--text-primary)]">Robotics:</strong>{" "}
+              Trained operators with teleoperation experience for manipulation
+              trajectories and embodied AI demonstrations.
             </li>
           </ul>
           <p>
-            For niche domains not covered by existing networks, we recruit
-            custom teams with verified credentials and domain-specific
-            onboarding.{" "}
-            <Citation href="https://sacra.com/c/micro1/">
-              Expert STEM annotation
-            </Citation>{" "}
-            commands $40+ per hour—reflecting the scarcity and value of genuine
-            domain expertise.
+            For niche domains without existing specialist networks, we recruit
+            and train custom teams with subject matter experts who define
+            collection protocols and quality standards.
           </p>
         </>
       ),
     },
     {
-      question: "How does your RLHF annotation process work?",
+      question: "How do you handle data licensing and compliance?",
       answer: (
         <>
           <p className="mb-3">
-            RLHF annotation follows a structured pipeline designed to maximize
-            signal quality:
+            The{" "}
+            <Citation href="https://kaptur.co/the-hidden-economy-behind-ai-data-licensing-takes-center-stage/">
+              AI data licensing market
+            </Citation>{" "}
+            is projected to reach $11B+ by 2030—reflecting how critical (and
+            complex) data rights have become. Every dataset we deliver includes:
           </p>
           <ul className="list-none space-y-2 mb-3">
             <li>
               <strong className="text-[var(--text-primary)]">
-                Response generation:
+                License documentation:
               </strong>{" "}
-              We generate response pairs from your model (or multiple models)
-              for the same prompts, creating comparison sets.
+              Clear terms specifying permitted uses, geographic restrictions,
+              model types, and commercial rights.
             </li>
             <li>
               <strong className="text-[var(--text-primary)]">
-                Calibration rounds:
+                Provenance records:
               </strong>{" "}
-              Before production annotation, annotators complete calibration
-              tasks with known rankings. This surfaces guideline ambiguities and
-              aligns annotator judgment.
+              Full chain of custody from original source through every
+              processing step—audit-ready for enterprise legal teams.
             </li>
             <li>
               <strong className="text-[var(--text-primary)]">
-                Preference ranking:
+                Regulatory compliance:
               </strong>{" "}
-              Expert annotators rank response pairs based on your criteria—
-              helpfulness, accuracy, safety, or custom dimensions. We capture
-              confidence scores alongside rankings.
+              GDPR data subject rights, CCPA disclosure requirements, and
+              jurisdiction-specific privacy regulations built into collection
+              protocols.
             </li>
             <li>
               <strong className="text-[var(--text-primary)]">
-                Disagreement analysis:
+                Rights negotiation:
               </strong>{" "}
-              Rather than discarding disagreements, we analyze them. Genuine
-              disagreement often reflects response quality closer to the
-              decision boundary—valuable signal for reward models.
+              Direct licensing agreements with content owners, publishers, and
+              data holders—not scraped content with uncertain provenance.
             </li>
           </ul>
           <p>
-            Output: preference datasets with Krippendorff&apos;s Alpha above
-            0.80 for well-defined criteria, plus full annotator metadata for
-            your reward model training.
+            We handle the complexity so your legal team gets clean documentation
+            and your researchers get usable data.
           </p>
         </>
       ),
     },
     {
-      question: "What quality metrics do you report?",
+      question: "What scale can you deliver, and how fast?",
       answer: (
         <>
           <p className="mb-3">
-            We provide comprehensive quality metrics because what gets measured
-            gets managed:
+            Scale depends on data type and complexity. Reference points from the
+            industry:
           </p>
           <ul className="list-none space-y-2 mb-3">
             <li>
               <strong className="text-[var(--text-primary)]">
-                Inter-annotator agreement (IAA):
+                Video clips:
               </strong>{" "}
-              Percentage agreement across annotators on the same items. Target:
-              85%+ for objective tasks, with lower thresholds acceptable for
-              inherently subjective judgments.
+              Millions of annotated clips per project.{" "}
+              <Citation href="https://arxiv.org/html/2503.09642v1">
+                Open-Sora 2.0
+              </Citation>{" "}
+              used 85M videos; we can source and process at comparable scale
+              with proper licensing.
             </li>
             <li>
               <strong className="text-[var(--text-primary)]">
-                Krippendorff&apos;s Alpha:
+                Robot trajectories:
               </strong>{" "}
-              A chance-corrected agreement metric that works across different
-              annotation types. Target: above 0.80 for most tasks, with
-              documentation for lower values.
+              Tens of thousands to hundreds of thousands of demonstrations.{" "}
+              <Citation href="https://droid-dataset.github.io/">DROID</Citation>{" "}
+              collected 76K trajectories over 12 months; we can accelerate with
+              parallel collection teams.
             </li>
             <li>
               <strong className="text-[var(--text-primary)]">
-                Gold set accuracy:
+                Text-image pairs:
               </strong>{" "}
-              Performance on known-correct validation items embedded in the
-              annotation stream. Annotators must maintain 95%+ gold accuracy.
+              Hundreds of millions of aligned examples with human-validated
+              captions.
             </li>
             <li>
               <strong className="text-[var(--text-primary)]">
-                Disagreement analysis:
+                Specialized annotation:
               </strong>{" "}
-              Breakdown of where annotators disagree, with root cause analysis.
-              Often reveals guideline gaps rather than annotator errors.
+              Thousands to tens of thousands of expert-labeled examples for
+              domain-specific applications.
             </li>
           </ul>
           <p>
-            All metrics come with methodology documentation—how we calculated
-            them, what thresholds we used, and how to interpret edge cases.{" "}
-            <Citation href="https://www.innovatiana.com/en/post/inter-annotator-agreement">
-              IAA metrics
-            </Citation>{" "}
-            are context-dependent; we help you understand what &quot;good&quot;
-            looks like for your specific task.
+            Timeline varies by complexity. Simple web harvesting: weeks.
+            Large-scale human collection: months. We scope every project with
+            realistic timelines before starting.
           </p>
         </>
       ),
@@ -454,7 +440,7 @@ export default function EnrichPage() {
                 <div className="bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-lg p-2 min-w-[160px] shadow-xl">
                   <Link
                     href="/pillars/acquire"
-                    className="block px-3 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded hover:bg-[var(--bg-primary)]"
+                    className="block px-3 py-2 text-sm text-[var(--accent-primary)] rounded hover:bg-[var(--bg-primary)]"
                   >
                     Acquire
                   </Link>
@@ -466,7 +452,7 @@ export default function EnrichPage() {
                   </Link>
                   <Link
                     href="/pillars/enrich"
-                    className="block px-3 py-2 text-sm text-[var(--accent-primary)] rounded hover:bg-[var(--bg-primary)]"
+                    className="block px-3 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded hover:bg-[var(--bg-primary)]"
                   >
                     Enrich
                   </Link>
@@ -513,7 +499,7 @@ export default function EnrichPage() {
               Services
             </Link>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-[var(--accent-primary)]">Enrich</span>
+            <span className="text-[var(--accent-primary)]">Acquire</span>
           </nav>
         </div>
       </div>
@@ -534,39 +520,39 @@ export default function EnrichPage() {
           >
             <div className="flex items-center gap-3 mb-6">
               <span className="font-mono text-sm text-[var(--accent-primary)]">
-                03
+                01
               </span>
               <span className="w-12 h-px bg-[var(--accent-primary)]" />
               <span className="font-mono text-sm text-[var(--text-tertiary)] uppercase tracking-wider">
-                Expert Annotation
+                Data Acquisition
               </span>
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              <TextScramble text="ENRICH" scrambleOnHover={true} />
+              <TextScramble text="ACQUIRE" scrambleOnHover={true} />
               <br />
               <span className="text-[var(--accent-secondary)] italic">
-                Your Model Is Only as Smart as Its Teachers.
+                80% of ML Time Goes to Data. Make It Count.
               </span>
             </h1>
 
             <p className="text-xl text-[var(--text-secondary)] mb-4 leading-relaxed max-w-3xl">
-              Generic crowdsourced annotations train generic models. Expert
-              judgment creates differentiation.
+              The web corpus that powered GPT-3 and CLIP? Everyone has it now.
+              Table stakes.
             </p>
 
             <p className="text-xl text-[var(--text-secondary)] mb-8 leading-relaxed max-w-3xl">
-              RLHF, domain-specific labeling, video annotation, red
-              teaming—every task that requires{" "}
+              Your next breakthrough needs data that doesn&apos;t exist yet:
+              egocentric video, robot manipulation trajectories,
+              physics-accurate synthetic environments.{" "}
               <strong className="text-[var(--text-primary)]">
-                human intelligence, not just human time
+                You can&apos;t scrape this from the internet. We collect it.
               </strong>
-              . We provide PhD-level specialists, not click-farm workers.
             </p>
 
             <div className="flex flex-wrap gap-4">
               <Button href="#contact" size="lg">
-                Upgrade Your Annotation <ArrowRight className="w-4 h-4" />
+                Start Your Data Partnership <ArrowRight className="w-4 h-4" />
               </Button>
               <Button href="#capabilities" variant="secondary" size="lg">
                 Explore Capabilities
@@ -586,76 +572,74 @@ export default function EnrichPage() {
             className="max-w-4xl mx-auto"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-8">
-              The Annotation Quality Gap
+              The Data Wall
             </h2>
 
             <div className="prose prose-lg prose-invert max-w-none">
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6">
-                Here&apos;s an uncomfortable truth.{" "}
-                <Citation href="https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk">
-                  Gartner predicts 30% of GenAI projects will be abandoned
+                Here&apos;s the math.{" "}
+                <Citation href="https://venturebeat.com/ai/why-data-remains-the-greatest-challenge-for-machine-learning-projects">
+                  80% of ML project time
                 </Citation>{" "}
-                by the end of 2025 due to poor data quality. Not compute
-                constraints. Not architecture problems.{" "}
-                <strong className="text-[var(--text-primary)]">
-                  Bad training data.
-                </strong>
+                goes to data work. Not architecture experiments. Not
+                hyperparameter tuning. Not training runs.{" "}
+                <strong className="text-[var(--text-primary)]">Data.</strong>
               </p>
 
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6">
-                Most annotation gets outsourced to the lowest bidder.
-                Crowdsourced workers optimize for speed, not accuracy. They
-                label what they see, not what matters. And the errors compound:
-                a reward model trained on noisy preferences teaches your LLM the
-                wrong lessons.
+                And the easy data is gone. Not &quot;getting scarce.&quot; Gone.{" "}
+                <Citation href="https://www.weforum.org/stories/2025/12/data-ai-training-synthetic/">
+                  AI now consumes data faster than humanity generates it
+                </Citation>
+                . The corpus that built GPT-3? Picked clean. LAION-5B? Legal
+                minefield. Common Crawl? Everyone has it.
               </p>
 
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-8">
-                The gap is especially severe for tasks requiring judgment.
-                Labeling a bounding box is mechanical. Ranking which code
-                explanation is more helpful? That requires understanding the
-                code.
+                Which means your differentiator isn&apos;t architecture anymore.
+                It&apos;s data nobody else has.
               </p>
 
               <div className="space-y-4 mb-8 pl-4 border-l-2 border-[var(--accent-primary)]/30">
                 <p className="text-[var(--text-primary)] text-lg font-medium">
-                  Generic annotators miss subtle factual errors that experts
-                  catch instantly.
+                  You can&apos;t scrape robot manipulation trajectories from the
+                  internet.
                 </p>
                 <p className="text-[var(--text-primary)] text-lg font-medium">
-                  RLHF from non-experts trains reward models on surface
-                  features, not actual quality.
+                  You can&apos;t download egocentric video of humans doing
+                  household tasks at scale.
                 </p>
                 <p className="text-[var(--text-primary)] text-lg font-medium">
-                  Video annotation without temporal understanding produces
-                  inconsistent frame labels.
+                  You can&apos;t license physics-consistent video sequences from
+                  stock libraries.
                 </p>
                 <p className="text-[var(--text-primary)] text-lg font-medium">
-                  Red teaming by script-followers misses the creative attacks
-                  that matter.
+                  This data must be collected. Deliberately. At scale.
                 </p>
               </div>
 
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6">
-                The market is responding.{" "}
-                <Citation href="https://foundationcapital.com/metas-bet-on-scale-the-new-ai-data-paradigm/">
-                  Meta invested $14.3B in Scale AI
+                The race is already on.{" "}
+                <Citation href="https://restofworld.org/2026/china-robots-training-centers-workers/">
+                  China announced 40+ state-funded data collection centers
                 </Citation>{" "}
-                in 2025—one of its largest acquisitions ever. The frontier labs
-                know annotation quality is a competitive moat. And expert
-                annotation is becoming scarce:{" "}
-                <Citation href="https://sacra.com/c/micro1/">
-                  platforms accepting only the top 1% of applicants
+                by end of 2025—workers in VR headsets generating manipulation
+                trajectories 12 hours a day. The{" "}
+                <Citation href="https://robotics-transformer-x.github.io/">
+                  Open X-Embodiment consortium
                 </Citation>{" "}
-                for RLHF work.
+                pooled resources from 34 research labs to assemble 1M robot
+                episodes. That&apos;s still not enough for general-purpose
+                manipulation.
               </p>
 
               <div className="bg-[var(--bg-primary)] border border-[var(--accent-primary)]/20 rounded-xl p-6 my-8">
                 <p className="text-xl font-semibold mb-2">
-                  The labs that invest in expert annotation build better models.
+                  The labs that solve data acquisition will define the next
+                  generation of AI.
                 </p>
                 <p className="text-[var(--text-secondary)]">
-                  The rest wonder why more data doesn&apos;t help.
+                  The rest will train on whatever&apos;s left.
                 </p>
               </div>
             </div>
@@ -673,83 +657,81 @@ export default function EnrichPage() {
             className="max-w-4xl mx-auto mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-8">
-              Why Expert Annotation Is the New Bottleneck
+              Why Data Acquisition Is the New Moat
             </h2>
 
             <div className="prose prose-lg prose-invert max-w-none">
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6">
-                The annotation market is undergoing a fundamental shift. As
-                models become more capable, the bar for useful training data
-                rises with them:
+                The race for training data has become the defining competition
+                in AI. Consider the scale of recent investments:
               </p>
 
               <ul className="space-y-4 mb-8">
                 <li className="flex items-start gap-3">
                   <span className="text-[var(--accent-primary)] mt-1">+</span>
                   <span className="text-[var(--text-secondary)]">
-                    <Citation href="https://www.perle.ai/resources/2025-ai-training-data-trends-the-future-of-domain-specific-ai-rlhf-and-custom-tooling">
-                      RLTHF (Targeted Human Feedback)
+                    <Citation href="https://restofworld.org/2026/china-robots-training-centers-workers/">
+                      China announced 40+ robot data collection centers
                     </Citation>{" "}
-                    achieves full human-annotation performance with only{" "}
-                    <strong className="text-[var(--text-primary)]">
-                      6-7% of the annotation effort
-                    </strong>
-                    —but only when that feedback comes from genuine experts who
-                    can identify hard cases
+                    by December 2025, with workers performing tasks in VR
+                    headsets to generate manipulation trajectories
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[var(--accent-primary)] mt-1">+</span>
                   <span className="text-[var(--text-secondary)]">
                     The{" "}
-                    <Citation href="https://foundationcapital.com/metas-bet-on-scale-the-new-ai-data-paradigm/">
-                      Meta-Scale AI deal
+                    <Citation href="https://robotics-transformer-x.github.io/">
+                      Open X-Embodiment dataset
                     </Citation>{" "}
-                    triggered customer departures from OpenAI, Google, and
-                    xAI—organizations unwilling to share proprietary data with a
-                    Meta-controlled vendor
+                    aggregated 1M+ real robot trajectories from 34 research
+                    labs—yet this represents only a fraction of what&apos;s
+                    needed for general-purpose robotics
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[var(--accent-primary)] mt-1">+</span>
                   <span className="text-[var(--text-secondary)]">
-                    <Citation href="https://www.hackerone.com/product/ai-red-teaming">
-                      AI red teaming has become standard practice
+                    <Citation href="https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/physical-ai-humanoid-robots.html">
+                      VCs invested $7.2B in robotics in 2025
                     </Citation>
-                    —HackerOne now maintains 750+ AI-focused security
-                    researchers for adversarial testing at Anthropic, Snap, and
-                    Adobe
+                    —up from $3.1B in 2023—with data infrastructure as a primary
+                    focus
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-[var(--accent-primary)] mt-1">+</span>
                   <span className="text-[var(--text-secondary)]">
-                    Video annotation at scale remains a{" "}
-                    <Citation href="https://labelyourdata.com/articles/data-annotation/video-segmentation">
-                      major bottleneck
+                    The AI data licensing market is projected to reach{" "}
+                    <Citation href="https://kaptur.co/the-hidden-economy-behind-ai-data-licensing-takes-center-stage/">
+                      $11.16B by 2030
                     </Citation>
-                    —a 10-minute video at 30fps contains 18,000 frames,
-                    requiring sophisticated temporal consistency that generic
-                    annotators struggle to maintain
+                    , as companies seek copyright-safe, properly licensed
+                    training data
                   </span>
                 </li>
               </ul>
 
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-6">
-                The constraint isn&apos;t tooling—annotation platforms have
-                scaled their software infrastructure. The constraint is{" "}
+                Video generation models like SkyReels and Sora require{" "}
                 <strong className="text-[var(--text-primary)]">
-                  access to humans who can do the work that matters
-                </strong>
-                : RLHF ranking, code evaluation, safety testing, domain-specific
-                labeling. The technical bottleneck is human.
+                  millions of video clips
+                </strong>{" "}
+                with temporal consistency—every frame must make physical sense
+                in relation to the last. Robotics models need real-world
+                manipulation data across thousands of scenarios. Multimodal
+                systems require precisely aligned text-image-audio-video
+                annotations.
               </p>
 
               <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
-                This creates an opportunity. Labs that secure access to expert
-                annotators build training data advantages that compound over
-                time—better data produces better models, which attract more
-                users, which fund more expert annotation.
+                This isn&apos;t data you can buy off the shelf. It must be{" "}
+                <strong className="text-[var(--text-primary)]">
+                  purposefully acquired
+                </strong>{" "}
+                by teams who understand both the technical requirements of
+                frontier models and the operational complexity of large-scale
+                data collection.
               </p>
             </div>
           </motion.div>
@@ -779,34 +761,33 @@ export default function EnrichPage() {
               >
                 contact us
               </Link>{" "}
-              to discuss your specific annotation requirements.
+              to discuss your specific data acquisition needs.
             </p>
 
             {/* Placeholder cards for future case studies */}
             <div className="grid md:grid-cols-2 gap-6">
               <div className="p-6 rounded-xl border border-dashed border-[var(--border-subtle)] bg-[var(--bg-primary)]">
                 <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 flex items-center justify-center mb-4">
-                  <MessageSquare className="w-5 h-5 text-[var(--accent-primary)] opacity-50" />
+                  <Video className="w-5 h-5 text-[var(--accent-primary)] opacity-50" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2 text-[var(--text-tertiary)]">
-                  Frontier LLM Lab
+                  Video Generation Lab
                 </h3>
                 <p className="text-sm text-[var(--text-tertiary)]">
-                  RLHF preference data from PhD-level annotators, achieving
-                  Krippendorff&apos;s Alpha above 0.85 for code quality
-                  judgments.
+                  How we sourced 2M+ licensed video clips for a frontier video
+                  generation model.
                 </p>
               </div>
               <div className="p-6 rounded-xl border border-dashed border-[var(--border-subtle)] bg-[var(--bg-primary)]">
                 <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 flex items-center justify-center mb-4">
-                  <Shield className="w-5 h-5 text-[var(--accent-primary)] opacity-50" />
+                  <Cpu className="w-5 h-5 text-[var(--accent-primary)] opacity-50" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2 text-[var(--text-tertiary)]">
-                  Safety Research Team
+                  Robotics Startup
                 </h3>
                 <p className="text-sm text-[var(--text-tertiary)]">
-                  Red teaming dataset of 50K+ adversarial prompts across 12
-                  attack categories, generated by security researchers.
+                  Building a manipulation dataset from scratch: 500K
+                  trajectories in 90 days.
                 </p>
               </div>
             </div>
@@ -827,11 +808,11 @@ export default function EnrichPage() {
               {"// CAPABILITIES"}
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              How We Enrich Data
+              How We Acquire Data
             </h2>
             <p className="text-[var(--text-secondary)] max-w-2xl mx-auto">
-              Four specialized annotation services, each requiring genuine human
-              expertise.
+              Four specialized pipelines, each designed for different data
+              acquisition challenges.
             </p>
           </motion.div>
 
@@ -853,7 +834,7 @@ export default function EnrichPage() {
             className="max-w-4xl mx-auto"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-8">
-              Our Annotation Process
+              Our Acquisition Process
             </h2>
 
             <div className="space-y-8">
@@ -862,25 +843,25 @@ export default function EnrichPage() {
                   step: "01",
                   title: "Requirements Discovery",
                   description:
-                    "We understand your task, quality criteria, and edge cases. This shapes annotator selection, guideline design, and quality metrics.",
+                    "We start by understanding your model architecture, target capabilities, and data gaps. This shapes collection protocols, quality thresholds, and delivery formats.",
                 },
                 {
                   step: "02",
-                  title: "Annotator Matching",
+                  title: "Pipeline Design",
                   description:
-                    "Based on your domain requirements, we match you with qualified specialists. STEM tasks get PhD annotators. Medical tasks get licensed physicians. No compromises.",
+                    "Based on your requirements, we design a custom acquisition pipeline—whether that means deploying human collectors, building scraping infrastructure, or setting up synthetic generation environments.",
                 },
                 {
                   step: "03",
-                  title: "Annotation & QA",
+                  title: "Collection & Validation",
                   description:
-                    "Annotators complete calibration rounds, then production work with embedded gold standard checks. Multi-annotator consensus for complex judgments.",
+                    "Data flows through multi-stage validation as it's collected. Expert reviewers catch quality issues early, before they compound into dataset-wide problems.",
                 },
                 {
                   step: "04",
-                  title: "Delivery & Iteration",
+                  title: "Delivery & Integration",
                   description:
-                    "Clean annotations delivered with full quality metrics: IAA, Krippendorff's Alpha, gold accuracy. We iterate on disagreements and refine guidelines as needed.",
+                    "Clean data is delivered in your preferred format with full provenance documentation. We support direct integration with your training pipeline.",
                 },
               ].map((item, index) => (
                 <motion.div
@@ -922,16 +903,15 @@ export default function EnrichPage() {
               {"// USE CASES"}
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Expert Annotation for Frontier Applications
+              Data Acquisition for Frontier Applications
             </h2>
             <p className="text-[var(--text-secondary)] text-lg mb-12 max-w-3xl">
-              Different applications require different types of expertise.
-              Here&apos;s what quality annotation looks like at the cutting
-              edge.
+              Each frontier AI domain has unique data requirements. Here&apos;s
+              what it takes to train at the cutting edge.
             </p>
 
             <div className="space-y-8">
-              {/* RLHF for LLMs */}
+              {/* Video Generation */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -940,73 +920,76 @@ export default function EnrichPage() {
               >
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="w-5 h-5 text-[var(--accent-primary)]" />
+                    <Video className="w-5 h-5 text-[var(--accent-primary)]" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">RLHF for LLMs</h3>
+                    <h3 className="text-xl font-semibold">Video Generation</h3>
                     <p className="text-[var(--text-tertiary)] text-sm">
-                      ChatGPT, Claude, Gemini
+                      Sora, Runway, Veo, HunyuanVideo
                     </p>
                   </div>
                 </div>
                 <div className="prose prose-sm prose-invert max-w-none">
                   <p className="text-[var(--text-secondary)] mb-4">
-                    Reinforcement Learning from Human Feedback is what separates
-                    a base model from a useful assistant.{" "}
-                    <Citation href="https://blog.ml.cmu.edu/2025/06/01/rlhf-101-a-technical-tutorial-on-reinforcement-learning-from-human-feedback/">
-                      RLHF requires human annotators
+                    Video generation isn&apos;t like generating single
+                    images—it&apos;s creating sequences where every frame must
+                    make physical sense in relation to the last.{" "}
+                    <Citation href="https://arxiv.org/html/2503.09642v1">
+                      Open-Sora 2.0
                     </Citation>{" "}
-                    to rank model outputs—and the quality of those rankings
-                    directly determines the quality of your reward model.
+                    trained on <strong>85 million videos</strong> across three
+                    stages, with clips constrained to 2-8 seconds and captions
+                    averaging 75+ words covering subject, action, environment,
+                    lighting, camera movement, and style.
                   </p>
                   <p className="text-[var(--text-secondary)] mb-4">
                     <strong className="text-[var(--text-primary)]">
                       The challenge:
                     </strong>{" "}
-                    Generic annotators rank based on surface features—response
-                    length, formality, keyword matching. Experts rank based on
-                    actual quality—correctness, completeness, appropriate
-                    caveats. The difference shows up in your model&apos;s
-                    behavior.
+                    Web-scraped video is noisy—generic captions, inconsistent
+                    quality, copyright issues. Stock libraries don&apos;t have
+                    the diversity or scale. You need millions of clips with
+                    precise temporal annotations, physics-accurate motion, and
+                    clear licensing.
                   </p>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-4 border-t border-[var(--border-subtle)]">
                     <div>
                       <p className="text-[var(--accent-primary)] font-mono text-lg">
-                        85%+ IAA
+                        16+ fps
                       </p>
                       <p className="text-xs text-[var(--text-tertiary)]">
-                        Inter-annotator agreement
+                        Minimum frame rate
                       </p>
                     </div>
                     <div>
                       <p className="text-[var(--accent-primary)] font-mono text-lg">
-                        0.80+ alpha
+                        2-8 sec
                       </p>
                       <p className="text-xs text-[var(--text-tertiary)]">
-                        Krippendorff&apos;s Alpha
+                        Optimal clip length
                       </p>
                     </div>
                     <div>
                       <p className="text-[var(--accent-primary)] font-mono text-lg">
-                        PhD-level
+                        75+ words
                       </p>
                       <p className="text-xs text-[var(--text-tertiary)]">
-                        Domain expertise
+                        Caption density
                       </p>
                     </div>
                     <div>
                       <p className="text-[var(--accent-primary)] font-mono text-lg">
-                        Full audit
+                        6 aspects
                       </p>
                       <p className="text-xs text-[var(--text-tertiary)]">
-                        Annotator metadata
+                        Per-clip annotation
                       </p>
                     </div>
                   </div>
                 </div>
               </motion.div>
 
-              {/* Video Understanding */}
+              {/* Robotics */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -1016,78 +999,82 @@ export default function EnrichPage() {
               >
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 flex items-center justify-center flex-shrink-0">
-                    <Video className="w-5 h-5 text-[var(--accent-primary)]" />
+                    <Cpu className="w-5 h-5 text-[var(--accent-primary)]" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">
-                      Video Understanding
+                      Robotics & Embodied AI
                     </h3>
                     <p className="text-[var(--text-tertiary)] text-sm">
-                      Temporal AI, action recognition, video search
+                      Manipulation, locomotion, humanoids
                     </p>
                   </div>
                 </div>
                 <div className="prose prose-sm prose-invert max-w-none">
                   <p className="text-[var(--text-secondary)] mb-4">
-                    Video annotation adds a dimension that images
-                    don&apos;t—time.{" "}
-                    <Citation href="https://averroes.ai/blog/video-segmentation-guide">
-                      Temporal segmentation
+                    Robotics models need real-world manipulation
+                    trajectories—not simulated, not scripted. The{" "}
+                    <Citation href="https://droid-dataset.github.io/">
+                      DROID dataset
                     </Citation>{" "}
-                    requires annotators to track when actions begin and end, how
-                    objects move through frames, and what constitutes a
-                    meaningful scene boundary. Frame-by-frame annotation of a
-                    10-minute video means labeling 18,000 images with temporal
-                    consistency.
+                    collected <strong>76,000 trajectories</strong> across 564
+                    scenes and 86 tasks using stereo cameras and teleoperation
+                    rigs. That took 50 collectors across three continents over
+                    12 months.{" "}
+                    <Citation href="https://github.com/OpenDriveLab/AgiBot-World">
+                      AgiBot World
+                    </Citation>{" "}
+                    pushed further with <strong>1M+ trajectories</strong> for
+                    bimanual manipulation.
                   </p>
                   <p className="text-[var(--text-secondary)] mb-4">
                     <strong className="text-[var(--text-primary)]">
                       The challenge:
                     </strong>{" "}
-                    Inconsistent annotations produce flickering labels and
-                    broken object tracks. Annotators need to understand what
-                    they&apos;re labeling—physics-aware judgment about when a
-                    &quot;throw&quot; starts, when a &quot;catch&quot; ends,
-                    what counts as a single &quot;action&quot; vs. a sequence.
+                    Most robotics datasets are lab-only—far from real-world
+                    conditions. You need diverse environments (homes,
+                    warehouses, offices), multiple camera angles with
+                    calibration data, and natural language task descriptions.
+                    This requires physical infrastructure and trained operators.
                   </p>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-4 border-t border-[var(--border-subtle)]">
                     <div>
                       <p className="text-[var(--accent-primary)] font-mono text-lg">
-                        Frame-level
+                        3+ cameras
                       </p>
                       <p className="text-xs text-[var(--text-tertiary)]">
-                        Temporal precision
+                        Stereo + wrist views
                       </p>
                     </div>
                     <div>
                       <p className="text-[var(--accent-primary)] font-mono text-lg">
-                        30 fps
+                        6-DOF
                       </p>
                       <p className="text-xs text-[var(--text-tertiary)]">
-                        High-density annotation
+                        Action trajectories
                       </p>
                     </div>
                     <div>
                       <p className="text-[var(--accent-primary)] font-mono text-lg">
-                        94%+ acc
+                        500+ scenes
                       </p>
                       <p className="text-xs text-[var(--text-tertiary)]">
-                        Segmentation accuracy
+                        Environment diversity
                       </p>
                     </div>
                     <div>
                       <p className="text-[var(--accent-primary)] font-mono text-lg">
-                        Consistent
+                        NL labels
                       </p>
                       <p className="text-xs text-[var(--text-tertiary)]">
-                        Cross-frame tracking
+                        Task descriptions
                       </p>
                     </div>
                   </div>
                 </div>
               </motion.div>
 
-              {/* Safety & Alignment */}
+              {/* Multimodal */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -1097,70 +1084,70 @@ export default function EnrichPage() {
               >
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 flex items-center justify-center flex-shrink-0">
-                    <Shield className="w-5 h-5 text-[var(--accent-primary)]" />
+                    <Globe className="w-5 h-5 text-[var(--accent-primary)]" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">
-                      Safety & Alignment
-                    </h3>
+                    <h3 className="text-xl font-semibold">Multimodal Models</h3>
                     <p className="text-[var(--text-tertiary)] text-sm">
-                      Red teaming, jailbreak testing, adversarial evaluation
+                      CLIP, LLaVA, GPT-4V, Gemini
                     </p>
                   </div>
                 </div>
                 <div className="prose prose-sm prose-invert max-w-none">
                   <p className="text-[var(--text-secondary)] mb-4">
-                    Before deployment, models need adversarial testing by people
-                    who think like attackers.{" "}
-                    <Citation href="https://venturebeat.com/security/red-teaming-llms-harsh-truth-ai-security-arms-race/">
-                      Red teaming research shows
+                    Multimodal systems must align different vector spaces so
+                    &quot;cat,&quot; an image of a cat, and the sound of a meow
+                    all map to the same concept.{" "}
+                    <Citation href="https://www.shaip.com/blog/multimodal-ai-the-complete-guide-to-training-data/">
+                      Research suggests
                     </Citation>{" "}
-                    that over 90% of published defenses can be bypassed with
-                    adaptive attacks—meaning your safety evaluations need
-                    creative humans, not just automated scanners.
+                    multimodal models need{" "}
+                    <strong>10-100x more training data</strong> than
+                    single-modality systems. CLIP trained on hundreds of
+                    millions of image-text pairs—and web-scale corpora are
+                    notoriously noisy.
                   </p>
                   <p className="text-[var(--text-secondary)] mb-4">
                     <strong className="text-[var(--text-primary)]">
                       The challenge:
                     </strong>{" "}
-                    Script-following testers generate predictable attacks your
-                    model has already seen. Real adversaries try novel
-                    approaches: multi-turn jailbreaks, encoding tricks, roleplay
-                    scenarios, logic traps. Effective red teaming requires
-                    security researchers who understand both the technology and
-                    the adversarial mindset.
+                    Misalignment between modalities is garbage-in, garbage-out.
+                    Facial expressions must sync with spoken words. Image
+                    captions must describe what&apos;s actually in the frame.
+                    Creating well-aligned datasets across text, image, audio,
+                    and video is a bottleneck that requires expert annotation.
                   </p>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-4 border-t border-[var(--border-subtle)]">
                     <div>
                       <p className="text-[var(--accent-primary)] font-mono text-lg">
-                        12+ types
+                        10-100x
                       </p>
                       <p className="text-xs text-[var(--text-tertiary)]">
-                        Attack categories
+                        More data than unimodal
                       </p>
                     </div>
                     <div>
                       <p className="text-[var(--accent-primary)] font-mono text-lg">
-                        Multi-turn
+                        &lt;50ms
                       </p>
                       <p className="text-xs text-[var(--text-tertiary)]">
-                        Conversation attacks
+                        Sync tolerance
                       </p>
                     </div>
                     <div>
                       <p className="text-[var(--accent-primary)] font-mono text-lg">
-                        Cultural
+                        4+ modalities
                       </p>
                       <p className="text-xs text-[var(--text-tertiary)]">
-                        Multi-context testing
+                        Text/image/audio/video
                       </p>
                     </div>
                     <div>
                       <p className="text-[var(--accent-primary)] font-mono text-lg">
-                        Expert
+                        Semantic
                       </p>
                       <p className="text-xs text-[var(--text-tertiary)]">
-                        Security researchers
+                        Cross-modal alignment
                       </p>
                     </div>
                   </div>
@@ -1206,19 +1193,19 @@ export default function EnrichPage() {
             className="max-w-3xl mx-auto text-center"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Stop Settling for Generic Annotation
+              Stop Waiting for Data That Won&apos;t Appear
             </h2>
             <p className="text-[var(--text-secondary)] text-lg mb-4">
-              Your model&apos;s capabilities are bounded by your training
-              data&apos;s quality.
+              Your researchers shouldn&apos;t spend 80% of their time on data
+              logistics.
             </p>
             <p className="text-[var(--text-secondary)] text-lg mb-8">
-              Tell us what you&apos;re building. We&apos;ll match you with
-              annotators who actually understand the domain—and deliver data
-              that moves your metrics.
+              Tell us what you&apos;re training. We&apos;ll scope a collection
+              pipeline that delivers the quality, scale, and provenance your
+              models need.
             </p>
             <Button href="/#contact" size="lg">
-              Discuss Your Annotation Needs <ArrowRight className="w-4 h-4" />
+              Discuss Your Data Requirements <ArrowRight className="w-4 h-4" />
             </Button>
           </motion.div>
         </div>
@@ -1228,21 +1215,9 @@ export default function EnrichPage() {
       <section className="py-12 border-t border-[var(--border-subtle)]">
         <div className="container">
           <p className="text-sm font-mono text-[var(--accent-primary)] mb-4">
-            {"// RELATED SERVICES"}
+            // RELATED SERVICES
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Link
-              href="/pillars/acquire"
-              className="p-4 rounded-lg border border-[var(--border-subtle)] hover:border-[var(--accent-primary)]/30 transition-colors group"
-            >
-              <span className="text-sm text-[var(--text-tertiary)]">01</span>
-              <h3 className="font-semibold group-hover:text-[var(--accent-primary)] transition-colors">
-                Acquire
-              </h3>
-              <p className="text-sm text-[var(--text-tertiary)]">
-                Data acquisition & sourcing
-              </p>
-            </Link>
             <Link
               href="/pillars/prepare"
               className="p-4 rounded-lg border border-[var(--border-subtle)] hover:border-[var(--accent-primary)]/30 transition-colors group"
@@ -1256,6 +1231,18 @@ export default function EnrichPage() {
               </p>
             </Link>
             <Link
+              href="/pillars/enrich"
+              className="p-4 rounded-lg border border-[var(--border-subtle)] hover:border-[var(--accent-primary)]/30 transition-colors group"
+            >
+              <span className="text-sm text-[var(--text-tertiary)]">03</span>
+              <h3 className="font-semibold group-hover:text-[var(--accent-primary)] transition-colors">
+                Enrich
+              </h3>
+              <p className="text-sm text-[var(--text-tertiary)]">
+                Expert annotation & RLHF
+              </p>
+            </Link>
+            <Link
               href="/pillars/validate"
               className="p-4 rounded-lg border border-[var(--border-subtle)] hover:border-[var(--accent-primary)]/30 transition-colors group"
             >
@@ -1264,7 +1251,7 @@ export default function EnrichPage() {
                 Validate
               </h3>
               <p className="text-sm text-[var(--text-tertiary)]">
-                Red teaming & safety evaluation
+                Red teaming & quality assurance
               </p>
             </Link>
           </div>
