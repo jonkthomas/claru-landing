@@ -7,25 +7,24 @@ interface ASCIIBackgroundProps {
   density?: number;
   speed?: number;
   opacity?: number;
+  variant?: "light" | "dark"; // For different section backgrounds
+  color?: string; // Custom color override
 }
 
 export default function ASCIIBackground({
   className = "",
-  density = 1,
-  speed = 0.5,
-  opacity = 0.15,
+  density = 0.5,
+  speed = 0.2,
+  opacity = 0.08,
+  variant = "light",
+  color,
 }: ASCIIBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | null>(null);
 
-  // ASCII character sets for different brightness levels
-  const ASCII_CHARS = useMemo(
-    () =>
-      " .'`^\",:;Il!i><~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$",
-    [],
-  );
+  // More interesting character set with symbols
+  const ASCII_CHARS = useMemo(() => " ·:;+=x#@", []);
 
-  // Get character based on brightness (0-1)
   const getCharForBrightness = useCallback(
     (brightness: number): string => {
       const index = Math.floor(brightness * (ASCII_CHARS.length - 1));
@@ -34,44 +33,23 @@ export default function ASCIIBackground({
     [ASCII_CHARS],
   );
 
-  // Simplex-like noise function for organic movement
+  // Simplified noise with wave patterns
   const noise = useCallback(
     (x: number, y: number, t: number): number => {
       const scale = 0.015;
-      const timeScale = speed * 0.0008;
-
+      const timeScale = speed * 0.0003;
       const nx = x * scale;
       const ny = y * scale;
       const nt = t * timeScale;
 
-      // Multiple octaves of sine waves for organic noise
+      // Layered wave patterns
       let value = 0;
+      value += Math.sin(nx * 1.2 + nt * 0.7) * 0.35;
+      value += Math.sin(ny * 0.8 + nt * 0.5) * 0.35;
+      value += Math.sin((nx + ny) * 0.6 + nt * 0.4) * 0.2;
+      value += Math.sin(nx * ny * 0.02 + nt * 0.2) * 0.1;
 
-      // Large scale waves
-      value += Math.sin(nx * 0.8 + nt * 0.5) * 0.3;
-      value += Math.sin(ny * 0.6 + nt * 0.4) * 0.3;
-      value += Math.sin((nx + ny) * 0.4 + nt * 0.3) * 0.2;
-
-      // Medium scale
-      value += Math.sin(nx * 1.5 - nt * 0.6) * 0.15;
-      value += Math.sin(ny * 1.2 + nt * 0.5) * 0.15;
-
-      // Fine detail
-      value += Math.sin(nx * 3.0 + ny * 2.0 + nt * 0.8) * 0.08;
-      value += Math.sin(nx * 2.5 - ny * 1.5 - nt * 0.7) * 0.08;
-
-      // Radial component for center focus
-      const centerX = 0.5;
-      const centerY = 0.5;
-      const dx = (x / 100 - centerX) * 2;
-      const dy = (y / 100 - centerY) * 2;
-      const distFromCenter = Math.sqrt(dx * dx + dy * dy);
-      const radialFade = Math.max(0, 1 - distFromCenter * 0.5);
-
-      value *= 0.7 + radialFade * 0.3;
-
-      // Normalize to 0-1
-      return (value + 1.2) / 2.4;
+      return (value + 1) / 2;
     },
     [speed],
   );
@@ -80,92 +58,96 @@ export default function ASCIIBackground({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
-    const cellWidth = Math.floor(8 / density);
-    const cellHeight = Math.floor(14 / density);
+    // Cell sizing based on density
+    const cellWidth = Math.floor(14 / density);
+    const cellHeight = Math.floor(22 / density);
 
     let cols = 0;
     let rows = 0;
+    let lastTime = 0;
+    const targetFPS = 24;
+    const frameInterval = 1000 / targetFPS;
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const rect = canvas.getBoundingClientRect();
-
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-
-      ctx.scale(dpr, dpr);
-
+      canvas.width = rect.width;
+      canvas.height = rect.height;
       cols = Math.ceil(rect.width / cellWidth);
       rows = Math.ceil(rect.height / cellHeight);
     };
 
+    // Color based on variant or custom color
+    const getColor = (alpha: number): string => {
+      if (color) {
+        return color.replace(")", `, ${alpha})`).replace("rgb(", "rgba(");
+      }
+      if (variant === "dark") {
+        // Sage green on dark backgrounds
+        return `rgba(146, 176, 144, ${alpha})`;
+      }
+      // Dark sage/black on light backgrounds
+      return `rgba(90, 122, 84, ${alpha})`;
+    };
+
     const render = (timestamp: number) => {
+      animationRef.current = requestAnimationFrame(render);
+
+      const delta = timestamp - lastTime;
+      if (delta < frameInterval) return;
+      lastTime = timestamp - (delta % frameInterval);
+
       if (!ctx) return;
 
-      const rect = canvas.getBoundingClientRect();
-      ctx.clearRect(0, 0, rect.width, rect.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Set font
-      const fontSize = Math.floor(cellHeight * 0.85);
-      ctx.font = `${fontSize}px "JetBrains Mono", "Fira Code", "SF Mono", monospace`;
+      const fontSize = Math.floor(cellHeight * 0.75);
+      ctx.font = `${fontSize}px "JetBrains Mono", monospace`;
       ctx.textBaseline = "top";
 
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
+      for (let y = 0; y < rows; y += 1) {
+        for (let x = 0; x < cols; x += 1) {
           const noiseVal = noise(x, y, timestamp);
-          const char = getCharForBrightness(noiseVal);
 
-          // Skip empty characters for performance
+          if (noiseVal < 0.35) continue;
+
+          const char = getCharForBrightness(noiseVal);
           if (char === " ") continue;
 
-          // Calculate color based on noise value
-          const brightness = noiseVal;
-
-          // Create color with green accent for bright areas
-          let r, g, b;
-          if (brightness > 0.65) {
-            // Accent green for bright spots
-            const accentStrength = (brightness - 0.65) / 0.35;
-            r = Math.floor(50 * (1 - accentStrength));
-            g = Math.floor(80 + 175 * accentStrength);
-            b = Math.floor(50 + 86 * accentStrength);
-          } else {
-            // Gray for darker areas
-            const gray = Math.floor(40 + brightness * 60);
-            r = gray;
-            g = gray;
-            b = gray;
-          }
-
-          const alpha = brightness * opacity * 0.8;
-          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+          const alpha = noiseVal * opacity;
+          ctx.fillStyle = getColor(alpha);
           ctx.fillText(char, x * cellWidth, y * cellHeight);
         }
       }
-
-      animationRef.current = requestAnimationFrame(render);
     };
 
     resize();
-    window.addEventListener("resize", resize);
+
+    let resizeTimeout: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resize, 200);
+    };
+
+    window.addEventListener("resize", handleResize);
     animationRef.current = requestAnimationFrame(render);
 
     return () => {
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(resizeTimeout);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [density, opacity, noise, getCharForBrightness]);
+  }, [density, opacity, noise, getCharForBrightness, variant, color]);
 
   return (
     <canvas
       ref={canvasRef}
-      className={`fixed inset-0 w-full h-full pointer-events-none ${className}`}
-      style={{ zIndex: -1 }}
+      className={`absolute inset-0 w-full h-full pointer-events-none ${className}`}
+      style={{ zIndex: 0 }}
       aria-hidden="true"
     />
   );

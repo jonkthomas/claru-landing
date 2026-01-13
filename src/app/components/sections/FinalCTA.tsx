@@ -1,55 +1,142 @@
 "use client";
 
-import FadeIn from "../effects/FadeIn";
+import { motion } from "framer-motion";
+import { ShieldCheck } from "lucide-react";
 import ContactForm from "../form/ContactForm";
+import TextScramble from "../effects/TextScramble";
+import { MorphingBlob } from "../effects/FloatingShapes";
 
 export default function FinalCTA() {
   return (
-    <section id="contact" className="section relative">
-      {/* Section divider */}
-      <div className="section-divider mb-16 md:mb-24" />
+    <section
+      id="contact"
+      className="section relative overflow-hidden bg-transparent"
+    >
+      {/* Morphing blob accents */}
+      <MorphingBlob
+        className="absolute -top-40 -left-40"
+        size={600}
+        color="rgba(146, 176, 144, 0.08)"
+      />
+      <MorphingBlob
+        className="absolute -bottom-40 -right-40"
+        size={500}
+        color="rgba(146, 176, 144, 0.06)"
+      />
 
-      <div className="container">
+      {/* ASCII corner decorations */}
+      <div className="absolute top-8 left-8 font-mono text-xs text-[var(--accent-primary)] opacity-20 hidden lg:block">
+        <pre>{`╔════════════════════╗
+║  INITIATE CONTACT  ║
+║  ▶ CONNECT NOW     ║
+╚════════════════════╝`}</pre>
+      </div>
+
+      <div className="absolute bottom-8 right-8 font-mono text-xs text-[var(--accent-primary)] opacity-20 hidden lg:block text-right">
+        <pre>{`┌────────────────┐
+│ STATUS: READY  │
+│ AWAITING INPUT │
+└────────────────┘`}</pre>
+      </div>
+
+      <div className="container relative z-10">
         {/* Section Header */}
-        <FadeIn className="text-center mb-12 md:mb-16">
+        <motion.div
+          className="text-center mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.span
+            className="inline-block text-sm font-mono text-[var(--accent-primary)] mb-4 uppercase tracking-wider"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            {"// LET'S BUILD TOGETHER"}
+          </motion.span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Stop Buying Labels.{" "}
-            <span className="text-[var(--accent-primary)]">
-              Start Leasing Intelligence.
-            </span>
+            From Raw Footage to <br className="hidden sm:block" />
+            <TextScramble
+              text=" Data Moat"
+              className="italic text-[var(--accent-primary)]"
+              scrambleOnHover={true}
+              autoPlay={true}
+              delay={400}
+            />
+            <span className="text-[var(--accent-primary)]">.</span>
           </h2>
           <p className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">
-            Your model is only as good as the mind that teaches it.
-            <br />
-            Get the human cortex your digital brain deserves.
+            Ready to turn your data problem into your competitive advantage?
+            Let&apos;s talk about your Visual AI data pipeline.
           </p>
-        </FadeIn>
+        </motion.div>
+
+        {/* Urgency Banner - TLP Framework */}
+        <motion.div
+          className="max-w-2xl mx-auto mb-8 p-4 rounded-lg border border-[var(--accent-primary)]/30 bg-[var(--accent-primary)]/5 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.15 }}
+        >
+          <p className="text-sm font-mono text-[var(--accent-primary)]">
+            <span className="font-bold">Limited Q1 Capacity:</span> We partner
+            deeply with a select number of labs. Only 2 spots remaining for Q1
+            2026.
+          </p>
+        </motion.div>
 
         {/* Form Container */}
-        <FadeIn delay={0.2}>
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-[var(--bg-secondary)] border border-[var(--border-subtle)] p-8 md:p-12 relative">
-              {/* Terminal decoration */}
-              <div className="absolute top-0 left-0 right-0 h-8 bg-[var(--bg-tertiary)] border-b border-[var(--border-subtle)] flex items-center px-4 gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-                <div className="w-3 h-3 rounded-full bg-green-500/50" />
-                <span className="ml-4 font-mono text-xs text-[var(--text-muted)]">
-                  claru://contact
-                </span>
-              </div>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <ContactForm />
+        </motion.div>
 
-              <div className="pt-8">
-                <ContactForm />
-              </div>
-
-              {/* ASCII border decoration */}
-              <pre className="absolute -bottom-4 left-1/2 -translate-x-1/2 font-mono text-[8px] text-[var(--border-medium)]">
-                {`═══════════════════════════════════════`}
-              </pre>
+        {/* Guarantee Section - TLP Framework */}
+        <motion.div
+          className="max-w-2xl mx-auto mt-10 p-6 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-secondary)]/50"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+        >
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-[var(--accent-primary)]/15 flex items-center justify-center">
+              <ShieldCheck className="w-6 h-6 text-[var(--accent-primary)]" />
+            </div>
+            <div>
+              <h4 className="font-bold text-[var(--text-primary)] mb-2">
+                Pilot Project Guarantee
+              </h4>
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                Start with a pilot project to validate fit. If you&apos;re not
+                completely satisfied with the quality and collaboration within
+                the first 30 days, we&apos;ll refund 100% of your pilot fee. No
+                questions asked.
+              </p>
             </div>
           </div>
-        </FadeIn>
+        </motion.div>
+
+        {/* Bottom decorative line */}
+        <motion.div
+          className="mt-16 flex items-center justify-center gap-4 opacity-30"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.3 }}
+          viewport={{ once: true }}
+        >
+          <div className="h-px flex-1 max-w-[100px] bg-gradient-to-r from-transparent to-[var(--accent-primary)]" />
+          <span className="font-mono text-xs text-[var(--accent-primary)]">
+            {"</>"}
+          </span>
+          <div className="h-px flex-1 max-w-[100px] bg-gradient-to-l from-transparent to-[var(--accent-primary)]" />
+        </motion.div>
       </div>
     </section>
   );

@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(npm run dev:*)",
+      "Bash(lsof:*)",
+      "Bash(curl:*)",
+      "Bash(kill:*)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_press_key",
+      "mcp__playwright__browser_close",
+      "Bash(npm install:*)",
+      "mcp__playwright__browser_snapshot",
+      "Bash(pkill:*)",
+      "Bash(xargs kill:*)",
+      "Bash(xargs kill -9 echo \"Killed all processes\")",
+      "Bash(find:*)",
+      "mcp__playwright__browser_hover",
+      "Bash(npm run build:*)",
+      "Bash(npx tsc:*)",
+      "Skill(glif-image-generator)",
+      "Bash(npx next dev:*)",
+      "Bash(npx next:*)",
+      "Skill(direct-response-copy)",
+      "WebSearch",
+      "Skill(prd)",
+      "Skill(ralph)",
+      "Skill(ralph-loop)",
+      "Bash(grep:*)",
+      "Skill(transformational-landing-pages)",
+      "Bash(git add:*)"
+    ]
+  }
+}

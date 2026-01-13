@@ -6,8 +6,9 @@ import Logo from "../ui/Logo";
 import Button from "../ui/Button";
 
 const navLinks = [
-  { href: "#offerings", label: "Offerings" },
+  { href: "#services", label: "Services" },
   { href: "#capabilities", label: "Capabilities" },
+  { href: "#testimonials", label: "Clients" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -39,7 +40,7 @@ export default function Header() {
         <div className="container">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <a href="#" className="relative z-10">
+            <a href="#hero" className="relative z-10">
               <Logo size="sm" className="text-[var(--text-primary)]" />
             </a>
 
@@ -49,14 +50,14 @@ export default function Header() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="font-mono text-sm text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors duration-300 relative group"
+                  className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-300 relative group"
                 >
                   {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-[var(--accent-primary)] transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-[var(--text-primary)] transition-all duration-300 group-hover:w-full" />
                 </a>
               ))}
               <Button href="#contact" size="sm">
-                [ Get Started ]
+                Book a Consultation
               </Button>
             </nav>
 
@@ -106,7 +107,7 @@ export default function Header() {
                 <motion.a
                   key={link.href}
                   href={link.href}
-                  className="font-mono text-2xl text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors"
+                  className="text-2xl text-[var(--text-primary)] hover:text-[var(--text-secondary)] transition-colors"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
@@ -127,7 +128,7 @@ export default function Header() {
                   size="lg"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  [ Get Started ]
+                  Book a Consultation
                 </Button>
               </motion.div>
             </div>

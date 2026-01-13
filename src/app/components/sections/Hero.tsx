@@ -1,90 +1,149 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import Logo from "../ui/Logo";
 import Button from "../ui/Button";
+import TextScramble from "../effects/TextScramble";
 
-const companies = ["Reka AI", "Moonvalley"];
+const teamAlumni = ["OpenAI", "DeepMind", "Meta AI", "Snap"];
 
 export default function Hero() {
-  const [mounted, setMounted] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-transparent to-[var(--bg-primary)] z-10 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-primary)]/50 via-transparent to-[var(--bg-primary)]/50 z-10 pointer-events-none" />
-
-      {/* Radial glow */}
+    <section
+      id="hero"
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-transparent"
+    >
+      {/* Subtle grid pattern overlay */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full z-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none opacity-[0.03]"
         style={{
-          background:
-            "radial-gradient(circle, rgba(0, 255, 136, 0.03) 0%, transparent 70%)",
+          backgroundImage: `
+            linear-gradient(var(--text-primary) 1px, transparent 1px),
+            linear-gradient(90deg, var(--text-primary) 1px, transparent 1px)
+          `,
+          backgroundSize: "80px 80px",
         }}
       />
 
-      {/* Content */}
-      <div className="container relative z-20">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Logo */}
-          {mounted && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-8"
-            >
-              <Logo size="lg" animate className="text-[var(--text-primary)]" />
-            </motion.div>
-          )}
+      {/* Animated corner accents */}
+      <div className="absolute top-20 left-8 opacity-20 hidden lg:block">
+        <motion.div
+          className="text-[var(--accent-secondary)] font-mono text-xs"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.8, duration: 0.5 }}
+        >
+          <span className="block">{"// INIT SEQUENCE"}</span>
+          <span className="block text-[var(--text-tertiary)]">
+            {"// LOADING..."}
+          </span>
+          <span className="block">
+            {">"} <span className="cursor" />
+          </span>
+        </motion.div>
+      </div>
 
-          {/* Headline */}
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-[1.1] tracking-tight"
-            initial={{ opacity: 0, y: 30 }}
+      <div className="absolute bottom-20 right-8 opacity-20 hidden lg:block">
+        <motion.div
+          className="text-[var(--accent-secondary)] font-mono text-xs text-right"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 1, duration: 0.5 }}
+        >
+          <span className="block">v2.0.25</span>
+          <span className="block text-[var(--text-tertiary)]">
+            STATUS: ACTIVE
+          </span>
+        </motion.div>
+      </div>
+
+      {/* Content */}
+      <motion.div
+        className="container relative z-20"
+        style={{ opacity: contentOpacity }}
+      >
+        <div className="max-w-3xl mx-auto text-center px-4 lg:px-12">
+          {/* Logo */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mb-6"
           >
-            The Human Cortex for{" "}
-            <span className="text-[var(--accent-primary)] glow-text">
-              Your Digital Brain.
-            </span>
+            <Logo size="lg" className="text-[var(--text-primary)]" />
+          </motion.div>
+
+          {/* Primer - TLP Framework */}
+          <motion.p
+            className="text-sm md:text-base font-mono text-[var(--accent-secondary)] mb-4 uppercase tracking-wider"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.15 }}
+          >
+            The complete data engine for frontier Visual AI
+          </motion.p>
+
+          {/* Headline with text effects */}
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-[1.1] tracking-tight text-[var(--text-primary)]"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <span className="inline-block">From Raw Footage</span>
+            <br className="hidden sm:block" />
+            <span className="inline-block">to</span>
+            <TextScramble
+              text=" Data Moat"
+              className="inline-block text-[var(--accent-secondary)] italic"
+              scrambleOnHover={true}
+              autoPlay={true}
+              delay={600}
+            />
+            <span className="inline-block">.</span>
           </motion.h1>
 
-          {/* Subheadline */}
+          {/* Subheadline - End-to-end value prop */}
           <motion.p
             className="text-lg md:text-xl text-[var(--text-secondary)] mb-10 max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, delay: 0.4 }}
           >
-            Frontier models have hit a wall with commodity data. Stop feeding
-            your R&D to a black box. We provide the embedded, expert-grade
-            intelligence you need to solve{" "}
-            <span className="text-[var(--text-primary)]">reasoning</span>,{" "}
-            <span className="text-[var(--text-primary)]">coding</span>, and{" "}
-            <span className="text-[var(--text-primary)]">physical reality</span>
-            .
+            Most labs treat data as a procurement problem.{" "}
+            <span className="text-[var(--text-primary)]">
+              The ones pulling ahead treat it as strategic advantage.
+            </span>{" "}
+            We build{" "}
+            <span className="text-[var(--accent-secondary)] font-medium">
+              end-to-end data pipelines
+            </span>{" "}
+            for video, vision, and robotics AI.
           </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, delay: 0.5 }}
           >
             <Button href="#contact" size="lg">
-              [ Initialize Your Squad ]
+              Book a Consultation — Limited Q1 Capacity
             </Button>
-            <Button href="#offerings" variant="secondary" size="lg">
-              Learn More
+            <Button href="#services" variant="secondary" size="lg">
+              See How We Work
             </Button>
           </motion.div>
 
@@ -93,44 +152,56 @@ export default function Hero() {
             className="flex flex-col items-center gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, delay: 0.6 }}
           >
-            <p className="text-sm text-[var(--text-tertiary)] font-mono">
-              Trusted by frontier AI labs
+            <p className="text-sm text-[var(--text-tertiary)] font-mono uppercase tracking-wider">
+              Trusted by researchers from
             </p>
-            <div className="flex items-center gap-8">
-              {companies.map((company, index) => (
+            <div className="flex items-center gap-6 flex-wrap justify-center">
+              {teamAlumni.map((org) => (
                 <motion.span
-                  key={company}
-                  className="text-[var(--text-secondary)] font-mono text-sm opacity-60 hover:opacity-100 transition-opacity"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 0.6, y: 0 }}
-                  transition={{ delay: 1.2 + index * 0.1 }}
-                  whileHover={{ opacity: 1 }}
+                  key={org}
+                  className="text-[var(--text-secondary)] text-sm opacity-60 hover:opacity-100 transition-opacity cursor-default"
+                  whileHover={{ scale: 1.05 }}
                 >
-                  {company}
+                  <TextScramble text={org} scrambleOnHover={true} />
                 </motion.span>
               ))}
             </div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
+        transition={{ delay: 0.8 }}
       >
-        <motion.div
-          className="w-6 h-10 border-2 border-[var(--border-medium)] rounded-full flex items-start justify-center p-2"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <div className="w-1 h-2 bg-[var(--accent-primary)] rounded-full" />
-        </motion.div>
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-[10px] text-[var(--text-muted)] uppercase tracking-widest font-mono">
+            Scroll
+          </span>
+          <motion.div
+            className="w-6 h-10 border border-[var(--border-medium)] rounded-full flex items-start justify-center p-2"
+            whileHover={{ borderColor: "var(--accent-primary)" }}
+          >
+            <motion.div
+              className="w-1 h-2 bg-[var(--accent-secondary)] rounded-full"
+              animate={{ y: [0, 16, 0] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </motion.div>
+        </div>
       </motion.div>
+
+      {/* Bottom gradient fade to dark */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[var(--bg-primary)]/80 to-transparent pointer-events-none" />
     </section>
   );
 }

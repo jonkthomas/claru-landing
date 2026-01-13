@@ -1,15 +1,41 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ASCIIBackground from "./components/effects/ASCIIBackground";
+import dynamic from "next/dynamic";
 import Header from "./components/layout/Header";
 import Hero from "./components/sections/Hero";
-import Wedge from "./components/sections/Wedge";
-import ParadigmShift from "./components/sections/ParadigmShift";
+import ProblemAgitation from "./components/sections/ProblemAgitation";
+import FourPillars from "./components/sections/FourPillars";
 import Capabilities from "./components/sections/Capabilities";
 import Testimonials from "./components/sections/Testimonials";
 import FinalCTA from "./components/sections/FinalCTA";
 import Footer from "./components/sections/Footer";
+
+const LenisProvider = dynamic(
+  () => import("./components/providers/LenisProvider"),
+  { ssr: false },
+);
+
+const CustomCursor = dynamic(
+  () =>
+    import("./components/effects/MagneticCursor").then(
+      (mod) => mod.CustomCursor,
+    ),
+  { ssr: false },
+);
+
+const ASCIIRobotBackground = dynamic(
+  () => import("./components/effects/ASCIIRobotBackground"),
+  { ssr: false },
+);
+
+const SubtleAsciiShader = dynamic(
+  () =>
+    import("./components/effects/ShaderBackground").then(
+      (mod) => mod.SubtleAsciiShader,
+    ),
+  { ssr: false },
+);
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -18,22 +44,29 @@ export default function Home() {
     setMounted(true);
   }, []);
 
-  return (
-    <>
-      {/* ASCII Background Effect */}
-      {mounted && <ASCIIBackground opacity={0.08} speed={0.3} density={0.8} />}
+  if (!mounted) return null;
 
-      {/* Noise overlay */}
-      <div className="noise-overlay fixed inset-0 pointer-events-none" />
+  return (
+    <LenisProvider>
+      {/* Canvas ASCII animation with robot images */}
+      <ASCIIRobotBackground />
+
+      {/* Custom cursor - desktop only */}
+      <div className="hidden lg:block">
+        <CustomCursor />
+      </div>
+
+      {/* Noise overlay for texture */}
+      <div className="noise-overlay-animated" />
 
       {/* Header */}
       <Header />
 
       {/* Main Content */}
-      <main>
+      <main className="relative z-10">
         <Hero />
-        <Wedge />
-        <ParadigmShift />
+        <ProblemAgitation />
+        <FourPillars />
         <Capabilities />
         <Testimonials />
         <FinalCTA />
@@ -41,6 +74,6 @@ export default function Home() {
 
       {/* Footer */}
       <Footer />
-    </>
+    </LenisProvider>
   );
 }
