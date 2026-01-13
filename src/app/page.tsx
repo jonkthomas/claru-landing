@@ -29,14 +29,6 @@ const ASCIIRobotBackground = dynamic(
   { ssr: false },
 );
 
-const SubtleAsciiShader = dynamic(
-  () =>
-    import("./components/effects/ShaderBackground").then(
-      (mod) => mod.SubtleAsciiShader,
-    ),
-  { ssr: false },
-);
-
 export default function Home() {
   const [mounted, setMounted] = useState(false);
 

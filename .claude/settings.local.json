@@ -32,7 +32,10 @@
       "Skill(ralph-loop)",
       "Bash(grep:*)",
       "Skill(transformational-landing-pages)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(vercel --yes)",
+      "Bash(git push)"
     ]
   }
 }
