@@ -44,7 +44,7 @@
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "This is the scaffold only - content sections will be added in subsequent stories"
     },
     {
@@ -64,7 +64,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "Copy should sound like a technical expert, not marketing. Use direct-response rhythm."
     },
     {
@@ -85,7 +85,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 4,
-      "passes": false,
+      "passes": true,
       "notes": "Research needed: find citations for deduplication bottleneck, quality filtering stats, industry investment"
     },
     {
@@ -104,7 +104,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 5,
-      "passes": false,
+      "passes": true,
       "notes": "Research: RefinedWeb, RedPajama, deduplication papers, multimodal alignment research"
     },
     {
@@ -124,7 +124,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 6,
-      "passes": false,
+      "passes": true,
       "notes": "Placeholder content - will be replaced with real case studies later"
     },
     {
@@ -146,7 +146,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 7,
-      "passes": false,
+      "passes": true,
       "notes": "Use technical terminology accurately - MinHashLSH, perplexity scoring, etc."
     },
     {
@@ -166,7 +166,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 8,
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -187,7 +187,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 9,
-      "passes": false,
+      "passes": true,
       "notes": "Research: RefinedWeb scale, dedup stats, video alignment requirements, robotics data normalization"
     },
     {
@@ -211,7 +211,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 10,
-      "passes": false,
+      "passes": true,
       "notes": "FAQItem must accept React.ReactNode for answer prop, not string"
     },
     {
@@ -228,7 +228,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 11,
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {

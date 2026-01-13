@@ -31,6 +31,33 @@ Started: 2026-01-13
 
 ---
 
+## US-002 through US-011: Complete PREPARE page.tsx with all sections
+- Status: COMPLETE
+- Created /src/app/pillars/prepare/page.tsx with all sections in one commit
+- Hero: "02" pillar number, "PREPARE" TextScramble, "Raw Data Is Worthless. Prepared Data Is Everything." subtitle
+- Problem section "The Preparation Bottleneck" with VentureBeat 80% stat, Zilliz deduplication bottleneck citation
+- Market Context with RefinedWeb (5T tokens), RedPajama-V2 (30T tokens), deduplication research citations
+- Proof section with placeholder cards: Foundation Model Lab, Video AI Startup
+- Capabilities: Layers (Deduplication), Filter (Quality Filtering), FileText (Format Normalization), Cpu (Multimodal Alignment)
+- Process: Data Audit -> Pipeline Configuration -> Processing & Validation -> Delivery & Integration
+- Use Cases: LLM Pre-Training (RefinedWeb citation), Video-Language Models (TALC citation), Robotics (Open X-Embodiment citation)
+- FAQ with 5 JSX answers about dedup methods, quality tradeoffs, multimodal, scale, lineage
+- CTA: "Stop Fighting Your Data Pipeline"
+- 15+ inline citations with real URLs
+- Build passes
+
+### Learnings:
+- More efficient to create full page.tsx with all sections at once following acquire pattern
+- Deduplication stats: 30%+ removal typical, 77% NearDup content has 50+ token exact matches
+- RefinedWeb: 5T tokens from CommonCrawl with strict deduplication
+- RedPajama-V2: 30T tokens with 40+ quality signals
+- SlimPajama: higher information density through extensive deduplication
+- Multimodal alignment requires <50ms sync tolerance for video-text
+- Key technical terms: MinHashLSH, perplexity scoring, semantic dedup, cross-modal embeddings
+- Icons used: Layers, Filter, FileText, Cpu, Video, ChevronRight, ArrowRight, ExternalLink
+
+---
+
 ## US-014: Create VALIDATE layout.tsx with metadata and JSON-LD schema
 - Status: COMPLETE
 - Created /src/app/pillars/validate/layout.tsx
