@@ -47,6 +47,48 @@ Started: 2026-01-13
 
 ---
 
+## US-012: Create ENRICH layout.tsx with metadata and JSON-LD schema
+- Status: COMPLETE
+- Created /src/app/pillars/enrich/layout.tsx
+- Metadata title: "Expert Data Annotation for AI Labs | Claru" (under 60 chars)
+- Description covers RLHF, expert annotation, PhD-level specialists, frame-level video labeling, red teaming
+- Keywords: data annotation, RLHF, expert labeling, AI training data, human feedback, preference data, video annotation, red teaming, AI safety
+- JSON-LD schema with Service (Expert Data Annotation Services), BreadcrumbList (Home -> Enrich), FAQPage (5 questions)
+- Build passes
+
+### Learnings:
+- ENRICH pillar is about human intelligence, not just human time
+- Key services: RLHF preference data, frame-level video annotation, expert domain annotation, red teaming
+- Quality metrics: IAA >85%, Krippendorff's Alpha >0.80
+
+---
+
+## US-013: Create ENRICH page.tsx with full content
+- Status: COMPLETE
+- Created /src/app/pillars/enrich/page.tsx with all sections
+- Hero: "03" pillar number, "ENRICH" TextScramble, "Your Model Is Only as Smart as Its Teachers." subtitle
+- Problem section "The Annotation Quality Gap" with Gartner 30% GenAI abandonment stat, Meta Scale AI investment
+- Market Context with RLTHF 6-7% efficiency, HackerOne 750+ AI red teamers, video annotation challenges
+- Proof section with placeholder cards: Frontier LLM Lab (RLHF), Safety Research Team (red teaming)
+- Capabilities: Sparkles (RLHF & Preference), Video (Frame-Level Annotation), Users (Expert Domain), Shield (Red Teaming)
+- Process: Requirements Discovery -> Annotator Matching -> Annotation & QA -> Delivery & Iteration
+- Use Cases: RLHF for LLMs (IAA, Krippendorff's Alpha), Video Understanding (temporal annotation), Safety & Alignment (red teaming)
+- FAQ with 5 JSX answers about expert vs crowd, quality at scale, domain coverage, RLHF process, quality metrics
+- CTA: "Stop Settling for Generic Annotation"
+- 10+ inline citations with real URLs
+- Build passes
+
+### Learnings:
+- RLTHF (Targeted Human Feedback) achieves full annotation quality with 6-7% effort - strong efficiency stat
+- Meta invested $14.3B in Scale AI (49% stake) - shows annotation market importance
+- HackerOne maintains 750+ AI-focused researchers - red teaming becoming standard
+- Video annotation: 10-minute video at 30fps = 18,000 frames - quantifies challenge
+- Expert STEM annotation commands $40+/hour vs $20 for general tasks
+- Inter-annotator agreement thresholds: 85%+ for objective, 0.80+ Krippendorff's Alpha
+- Icons used: Sparkles, Video, Users, Shield, MessageSquare, ChevronRight, ArrowRight, ExternalLink
+
+---
+
 ## US-015: Create VALIDATE page.tsx with full content
 - Status: COMPLETE
 - Created /src/app/pillars/validate/page.tsx with all sections

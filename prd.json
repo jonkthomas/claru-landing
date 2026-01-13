@@ -270,7 +270,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 13,
-      "passes": false,
+      "passes": true,
       "notes": "This is a large story but follows exact PREPARE pattern. All sections in one file."
     },
     {
