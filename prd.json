@@ -246,7 +246,7 @@
         "Typecheck passes"
       ],
       "priority": 12,
-      "passes": false,
+      "passes": true,
       "notes": "Reference acquire/layout.tsx for structure"
     },
     {
@@ -312,7 +312,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 15,
-      "passes": false,
+      "passes": true,
       "notes": "Research: red teaming frameworks, benchmark contamination studies, EU AI Act"
     },
     {

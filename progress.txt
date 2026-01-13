@@ -31,3 +31,44 @@ Started: 2026-01-13
 
 ---
 
+## US-014: Create VALIDATE layout.tsx with metadata and JSON-LD schema
+- Status: COMPLETE
+- Created /src/app/pillars/validate/layout.tsx
+- Metadata title: "AI Red Teaming & Data Validation | Claru" (under 60 chars)
+- Description covers red teaming, benchmark curation, bias detection, safety evaluation
+- Keywords: AI red teaming, data validation, benchmark curation, bias detection, AI safety evaluation, adversarial testing, model validation, EU AI Act compliance
+- JSON-LD schema with Service (AI Data Validation Services), BreadcrumbList (Home -> Validate), FAQPage (5 questions)
+- Build passes
+
+### Learnings:
+- Followed exact structure from acquire/layout.tsx
+- VALIDATE theme focuses on safety/risk - red teaming, bias, benchmark contamination
+- EU AI Act compliance is a key regulatory angle for this pillar
+
+---
+
+## US-015: Create VALIDATE page.tsx with full content
+- Status: COMPLETE
+- Created /src/app/pillars/validate/page.tsx with all sections
+- Hero: "04" pillar number, "VALIDATE" TextScramble, "Ship Broken Models, Break User Trust." subtitle
+- Problem section "The Hidden Quality Crisis" with citations on red team bypass rates, benchmark contamination, and bias
+- Market Context with EU AI Act, NIST AI RMF, and AI Safety Index citations
+- Proof section with placeholder cards: Foundation Model Company, Enterprise AI Team
+- Capabilities: ShieldCheck (Red Teaming), Database (Benchmark Curation), Scale (Bias Detection), CheckCircle (Post-Training Eval)
+- Process: Scope Definition -> Test Design -> Evaluation Execution -> Reporting & Remediation
+- Use Cases: LLM Safety Evaluation, Benchmark Integrity, Bias & Fairness Audits
+- FAQ with 5 JSX answers covering red teaming methods, benchmark contamination, bias types, golden sets, EU AI Act compliance
+- CTA: "Don't Ship Until You're Sure"
+- 9+ inline citations with real URLs
+- Build passes
+
+### Learnings:
+- Direct-response copy for VALIDATE emphasizes risk/fear (broken models, user trust, regulatory fines)
+- Red teaming research shows >90% attack success rates against defenses - strong stat for urgency
+- Benchmark contamination is well-documented (100% leakage ratios, 4.9x score inflation)
+- EU AI Act has specific deadlines (Aug 2025 GPAI, Aug 2026 high-risk) - useful for urgency
+- Bias research has concrete examples (salary recommendations $120K lower for women)
+- Icons used: ShieldCheck, Database, Scale, CheckCircle, AlertTriangle, Target
+
+---
+
