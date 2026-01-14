@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // More detailed ASCII character set for better gradients
 const ASCII_CHARS =
@@ -17,6 +17,17 @@ export default function ASCIIRobotBackground() {
     cols: 0,
     rows: 0,
   });
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile on mount
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -49,7 +60,10 @@ export default function ASCIIRobotBackground() {
       // --- LEFT IMAGE (HUMAN) ---
       const img = new Image();
       img.crossOrigin = "anonymous";
-      img.src = "/images/robot-face2.png"; // Keeping filename but this is the "Human" side
+      // Use WebP with mobile version for screens < 768px
+      img.src = isMobile
+        ? "/images/robot-face2-mobile.webp"
+        : "/images/robot-face2.webp";
 
       img.onload = () => {
         const offscreen = document.createElement("canvas");
@@ -79,7 +93,10 @@ export default function ASCIIRobotBackground() {
       // --- RIGHT IMAGE (ROBOT) ---
       const img2 = new Image();
       img2.crossOrigin = "anonymous";
-      img2.src = "/images/robot-face7.png";
+      // Use WebP with mobile version for screens < 768px
+      img2.src = isMobile
+        ? "/images/robot-face7-mobile.webp"
+        : "/images/robot-face7.webp";
 
       img2.onload = () => {
         const offscreen2 = document.createElement("canvas");
@@ -266,7 +283,7 @@ export default function ASCIIRobotBackground() {
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <canvas
