@@ -33,7 +33,7 @@
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Foundation for image optimization in subsequent stories"
     },
     {
