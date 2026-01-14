@@ -170,7 +170,7 @@
         "Verify in browser using dev-browser skill - throttle network to see skeletons"
       ],
       "priority": 10,
-      "passes": false,
+      "passes": true,
       "notes": "Match site aesthetic - dark bg, subtle animation"
     },
     {
