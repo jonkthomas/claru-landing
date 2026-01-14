@@ -20,7 +20,7 @@ export default function ASCIIRobotBackground() {
     rows: 0,
   });
 
-  const { isMobile } = useDeviceCapability();
+  const { isMobile, prefersReducedMotion } = useDeviceCapability();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -37,7 +37,10 @@ export default function ASCIIRobotBackground() {
     let rows = 0;
 
     const handleScroll = () => {
-      scrollRef.current = window.scrollY;
+      // Skip scroll handling when reduced motion is preferred
+      if (!prefersReducedMotion) {
+        scrollRef.current = window.scrollY;
+      }
     };
     window.addEventListener("scroll", handleScroll);
 
@@ -130,17 +133,10 @@ export default function ASCIIRobotBackground() {
     resize();
     window.addEventListener("resize", resize);
 
-    const animate = (timestamp: number) => {
-      // Throttle frame rate
-      const elapsed = timestamp - lastFrameTimeRef.current;
-      if (elapsed < targetFrameTime) {
-        animationRef.current = requestAnimationFrame(animate);
-        return;
-      }
-      lastFrameTimeRef.current = timestamp - (elapsed % targetFrameTime);
-
-      timeRef.current += 0.015;
-      const time = timeRef.current;
+    // Render a single frame (used for both animation loop and static reduced motion)
+    const renderFrame = (isStatic: boolean) => {
+      // For static frames, use time = 0 for consistent appearance
+      const time = isStatic ? 0 : timeRef.current;
       const { cols, rows } = dimensionsRef.current;
       const imageData = imageDataRef.current;
       const scroll = scrollRef.current;
@@ -279,18 +275,46 @@ export default function ASCIIRobotBackground() {
           }
         }
       }
+    };
 
+    // Animation loop for normal mode
+    const animate = (timestamp: number) => {
+      // Throttle frame rate
+      const elapsed = timestamp - lastFrameTimeRef.current;
+      if (elapsed < targetFrameTime) {
+        animationRef.current = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrameTimeRef.current = timestamp - (elapsed % targetFrameTime);
+
+      timeRef.current += 0.015;
+      renderFrame(false);
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    animationRef.current = requestAnimationFrame(animate);
+    // If reduced motion is preferred, render a single static frame
+    if (prefersReducedMotion) {
+      // Wait for images to load then render once
+      const checkAndRender = () => {
+        if (imageDataRef.current && imageData2Ref.current) {
+          renderFrame(true);
+        } else {
+          // Images not loaded yet, try again shortly
+          setTimeout(checkAndRender, 100);
+        }
+      };
+      setTimeout(checkAndRender, 100);
+    } else {
+      // Normal animation loop
+      animationRef.current = requestAnimationFrame(animate);
+    }
 
     return () => {
       cancelAnimationFrame(animationRef.current);
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isMobile]);
+  }, [isMobile, prefersReducedMotion]);
 
   return (
     <canvas
