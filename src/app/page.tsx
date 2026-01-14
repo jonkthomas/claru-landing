@@ -4,13 +4,33 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Header from "./components/layout/Header";
 import Hero from "./components/sections/Hero";
-import ProblemAgitation from "./components/sections/ProblemAgitation";
-import FourPillars from "./components/sections/FourPillars";
-import Capabilities from "./components/sections/Capabilities";
-import Testimonials from "./components/sections/Testimonials";
-import FinalCTA from "./components/sections/FinalCTA";
 import Footer from "./components/sections/Footer";
 
+// Dynamic imports for below-the-fold sections
+const ProblemAgitation = dynamic(
+  () => import("./components/sections/ProblemAgitation"),
+  { ssr: false },
+);
+
+const FourPillars = dynamic(() => import("./components/sections/FourPillars"), {
+  ssr: false,
+});
+
+const Capabilities = dynamic(
+  () => import("./components/sections/Capabilities"),
+  { ssr: false },
+);
+
+const Testimonials = dynamic(
+  () => import("./components/sections/Testimonials"),
+  { ssr: false },
+);
+
+const FinalCTA = dynamic(() => import("./components/sections/FinalCTA"), {
+  ssr: false,
+});
+
+// Dynamic imports for effects and providers
 const LenisProvider = dynamic(
   () => import("./components/providers/LenisProvider"),
   { ssr: false },
