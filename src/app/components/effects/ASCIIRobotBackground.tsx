@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useDeviceCapability } from "@/app/hooks/useDeviceCapability";
 
 // More detailed ASCII character set for better gradients
 const ASCII_CHARS =
@@ -11,23 +12,15 @@ export default function ASCIIRobotBackground() {
   const animationRef = useRef<number>(0);
   const timeRef = useRef<number>(0);
   const scrollRef = useRef<number>(0);
+  const lastFrameTimeRef = useRef<number>(0);
   const imageDataRef = useRef<ImageData | null>(null);
   const imageData2Ref = useRef<ImageData | null>(null); // Second robot
   const dimensionsRef = useRef<{ cols: number; rows: number }>({
     cols: 0,
     rows: 0,
   });
-  const [isMobile, setIsMobile] = useState(false);
 
-  // Detect mobile on mount
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const { isMobile } = useDeviceCapability();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -36,7 +29,10 @@ export default function ASCIIRobotBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const fontSize = 10;
+    // Mobile: larger fontSize = fewer characters = less computation
+    const fontSize = isMobile ? 13 : 10;
+    // Mobile: target ~10 FPS, desktop: ~20 FPS
+    const targetFrameTime = isMobile ? 100 : 50; // ms per frame
     let cols = 0;
     let rows = 0;
 
@@ -134,7 +130,15 @@ export default function ASCIIRobotBackground() {
     resize();
     window.addEventListener("resize", resize);
 
-    const animate = () => {
+    const animate = (timestamp: number) => {
+      // Throttle frame rate
+      const elapsed = timestamp - lastFrameTimeRef.current;
+      if (elapsed < targetFrameTime) {
+        animationRef.current = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrameTimeRef.current = timestamp - (elapsed % targetFrameTime);
+
       timeRef.current += 0.015;
       const time = timeRef.current;
       const { cols, rows } = dimensionsRef.current;
@@ -151,12 +155,12 @@ export default function ASCIIRobotBackground() {
 
       // --- RENDER LEFT (HUMAN) ---
       if (imageData) {
-        const breathe = Math.sin(time * 0.5) * 0.5; // Slow breath
+        // Skip breathing effect on mobile for simpler rendering
+        const breathe = isMobile ? 0 : Math.sin(time * 0.5) * 0.5;
 
         for (let y = 0; y < rows; y++) {
           for (let x = 0; x < cols; x++) {
             // VIGNETTE: Fade out as we get closer to center
-            const distFromCenter = (centerX - x) / centerX; // 1.0 at left edge, 0.0 at center
             if (x > centerX) continue; // Don't verify left image pixels on right side
 
             // Mask opacity: clear the middle 40% of screen entirely
@@ -185,7 +189,8 @@ export default function ASCIIRobotBackground() {
             brightness = (brightness - 50) * 1.5 + 80;
             brightness = Math.max(0, Math.min(255, brightness));
 
-            if (brightness > 180) {
+            // Skip glow wave effect on mobile
+            if (!isMobile && brightness > 180) {
               const glow = Math.sin(time * 2 + x * 0.1) * 15;
               brightness = Math.min(255, brightness + glow);
             }
@@ -198,8 +203,8 @@ export default function ASCIIRobotBackground() {
             if (!char || (char === " " && brightness < 40)) continue;
 
             // SILVERISH SAGE GREEN PALETTE for Human
-            // Hue 115-125 (Sage/Muted Green)
-            const hue = 120 + Math.sin(x * 0.05 + time) * 5;
+            // Skip hue animation on mobile for simpler rendering
+            const hue = isMobile ? 120 : 120 + Math.sin(x * 0.05 + time) * 5;
             const sat = 25 + (brightness / 255) * 15; // Lower saturation for silver tone
             const light = 55 + (brightness / 255) * 35;
             const alpha = (0.3 + (brightness / 255) * 0.7) * maskAlpha;
@@ -214,7 +219,8 @@ export default function ASCIIRobotBackground() {
       // --- RENDER RIGHT (ROBOT) ---
       const imageData2 = imageData2Ref.current;
       if (imageData2) {
-        const breathe2 = Math.sin(time * 0.5 + Math.PI) * 0.5; // Alternating breath
+        // Skip breathing effect on mobile for simpler rendering
+        const breathe2 = isMobile ? 0 : Math.sin(time * 0.5 + Math.PI) * 0.5;
 
         for (let y = 0; y < rows; y++) {
           for (let x = 0; x < cols; x++) {
@@ -246,7 +252,8 @@ export default function ASCIIRobotBackground() {
             brightness = (brightness - 20) * 1.2 + 20;
             brightness = Math.max(0, Math.min(255, brightness));
 
-            if (brightness > 180) {
+            // Skip glitch effect on mobile
+            if (!isMobile && brightness > 180) {
               // Electric glitch effect
               const glitch = Math.random() > 0.99 ? 50 : 0;
               brightness = Math.min(255, brightness + glitch);
@@ -260,8 +267,8 @@ export default function ASCIIRobotBackground() {
             if (!char || (char === " " && brightness < 20)) continue;
 
             // SILVERISH SAGE GREEN PALETTE for Robot
-            // Hue 110-130 (Sage/Muted Green with slight variation)
-            const hue = 118 + Math.sin(y * 0.05 - time) * 8;
+            // Skip hue animation on mobile for simpler rendering
+            const hue = isMobile ? 118 : 118 + Math.sin(y * 0.05 - time) * 8;
             const sat = 30 + (brightness / 255) * 20; // Slightly higher saturation than human side
             const light = 60 + (brightness / 255) * 30;
             const alpha = (0.4 + (brightness / 255) * 0.6) * maskAlpha;
@@ -276,7 +283,7 @@ export default function ASCIIRobotBackground() {
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    animationRef.current = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(animationRef.current);
