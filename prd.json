@@ -86,7 +86,7 @@
         "Verify in browser using dev-browser skill - test mobile viewport"
       ],
       "priority": 5,
-      "passes": false,
+      "passes": true,
       "notes": "Keep the aesthetic, just reduce computation on mobile"
     },
     {
