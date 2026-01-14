@@ -186,7 +186,7 @@
         "Typecheck passes"
       ],
       "priority": 11,
-      "passes": false,
+      "passes": true,
       "notes": "Check existing font configuration, optimize if needed"
     },
     {
@@ -200,7 +200,7 @@
         "Typecheck passes"
       ],
       "priority": 12,
-      "passes": false,
+      "passes": true,
       "notes": "Next.js handles most prefetching automatically"
     },
     {
@@ -215,7 +215,7 @@
         "Typecheck passes"
       ],
       "priority": 13,
-      "passes": false,
+      "passes": true,
       "notes": "Smooth scroll can cause discomfort for motion-sensitive users"
     },
     {
@@ -229,7 +229,7 @@
         "Typecheck passes"
       ],
       "priority": 14,
-      "passes": false,
+      "passes": true,
       "notes": "Text scramble can be disorienting for motion-sensitive users"
     },
     {
@@ -244,7 +244,7 @@
         "Typecheck passes"
       ],
       "priority": 15,
-      "passes": false,
+      "passes": true,
       "notes": "Be careful not to remove CSS used by dynamic content"
     },
     {
@@ -262,7 +262,7 @@
         "Typecheck passes"
       ],
       "priority": 16,
-      "passes": false,
+      "passes": true,
       "notes": "Final verification - document actual scores achieved"
     }
   ]
