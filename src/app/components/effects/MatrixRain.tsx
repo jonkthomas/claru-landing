@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useDeviceCapability } from "@/app/hooks/useDeviceCapability";
 
 const MATRIX_CHARS =
   "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
@@ -21,9 +22,12 @@ export default function MatrixRain({
 }: MatrixRainProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
+  const lastFrameTimeRef = useRef<number>(0);
   const dropsRef = useRef<
     { y: number; speed: number; length: number; active: boolean }[]
   >([]);
+
+  const { isMobile, prefersReducedMotion } = useDeviceCapability();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -32,7 +36,11 @@ export default function MatrixRain({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const fontSize = 14;
+    // Mobile: larger font = fewer columns = less computation
+    const fontSize = isMobile ? 16 : 14;
+    // Mobile: target ~15 FPS, desktop: ~30 FPS
+    const targetFrameTime = isMobile ? 67 : 33;
+
     let cols = 0;
     let rows = 0;
 
@@ -56,7 +64,43 @@ export default function MatrixRain({
     resize();
     window.addEventListener("resize", resize);
 
-    const animate = () => {
+    // Render a single static frame for reduced motion
+    const renderStaticFrame = () => {
+      ctx.fillStyle = "rgba(5, 5, 5, 1)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.font = `${fontSize}px "JetBrains Mono", monospace`;
+
+      // Draw scattered static characters
+      for (let i = 0; i < dropsRef.current.length; i++) {
+        const drop = dropsRef.current[i];
+        if (!drop.active) continue;
+
+        const x = i * fontSize * 0.7;
+        const staticY = Math.floor(Math.random() * rows);
+
+        ctx.fillStyle = `rgba(146, 176, 144, ${opacity * 0.5})`;
+        const char =
+          ASCII_CHARS[Math.floor(Math.random() * ASCII_CHARS.length)];
+        ctx.fillText(char, x, staticY * fontSize);
+      }
+    };
+
+    // If reduced motion, render static frame and stop
+    if (prefersReducedMotion) {
+      renderStaticFrame();
+      return () => {
+        window.removeEventListener("resize", resize);
+      };
+    }
+
+    const animate = (timestamp: number) => {
+      // FPS throttling
+      const elapsed = timestamp - lastFrameTimeRef.current;
+      if (elapsed < targetFrameTime) {
+        animationRef.current = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrameTimeRef.current = timestamp - (elapsed % targetFrameTime);
       // Fade effect for trail
       ctx.fillStyle = "rgba(5, 5, 5, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -126,13 +170,13 @@ export default function MatrixRain({
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    animationRef.current = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(animationRef.current);
       window.removeEventListener("resize", resize);
     };
-  }, [density, speed, opacity]);
+  }, [density, speed, opacity, isMobile, prefersReducedMotion]);
 
   return (
     <canvas

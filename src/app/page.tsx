@@ -47,8 +47,8 @@ const CustomCursor = dynamic(
   { ssr: false },
 );
 
-const ASCIIRobotBackground = dynamic(
-  () => import("./components/effects/ASCIIRobotBackground"),
+const HeroBackground = dynamic(
+  () => import("./components/effects/HeroBackground"),
   { ssr: false },
 );
 
@@ -63,8 +63,8 @@ export default function Home() {
 
   return (
     <LenisProvider>
-      {/* Canvas ASCII animation with robot images */}
-      <ASCIIRobotBackground />
+      {/* Canvas ASCII animation - robots on desktop, matrix rain on mobile */}
+      <HeroBackground />
 
       {/* Custom cursor - desktop only */}
       <div className="hidden lg:block">
