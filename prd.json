@@ -51,7 +51,7 @@
         "Typecheck passes"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "Use sharp or squoosh CLI for conversion. Keep originals as backup."
     },
     {
