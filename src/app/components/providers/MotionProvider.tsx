@@ -1,12 +1,21 @@
 "use client";
 
 import { ReactNode } from "react";
-import { LazyMotion, domAnimation } from "framer-motion";
+import { LazyMotion, domAnimation, MotionConfig } from "framer-motion";
+import { useDeviceCapability } from "@/app/hooks/useDeviceCapability";
 
 interface MotionProviderProps {
   children: ReactNode;
 }
 
 export default function MotionProvider({ children }: MotionProviderProps) {
-  return <LazyMotion features={domAnimation}>{children}</LazyMotion>;
+  const { prefersReducedMotion } = useDeviceCapability();
+
+  return (
+    <LazyMotion features={domAnimation}>
+      <MotionConfig reducedMotion={prefersReducedMotion ? "always" : "never"}>
+        {children}
+      </MotionConfig>
+    </LazyMotion>
+  );
 }
