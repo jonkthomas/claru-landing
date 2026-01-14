@@ -4,6 +4,7 @@ import { useEffect, useRef, createContext, useContext, ReactNode } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useDeviceCapability } from "@/app/hooks/useDeviceCapability";
 
 // Register GSAP plugins
 if (typeof window !== "undefined") {
@@ -26,8 +27,15 @@ interface LenisProviderProps {
 
 export default function LenisProvider({ children }: LenisProviderProps) {
   const lenisRef = useRef<Lenis | null>(null);
+  const { prefersReducedMotion } = useDeviceCapability();
 
   useEffect(() => {
+    // Skip Lenis initialization when reduced motion is preferred
+    // Native browser scrolling will be used instead
+    if (prefersReducedMotion) {
+      return;
+    }
+
     // Initialize Lenis
     const lenis = new Lenis({
       duration: 1.2,
@@ -77,7 +85,7 @@ export default function LenisProvider({ children }: LenisProviderProps) {
       gsap.ticker.remove(lenis.raf);
       lenis.destroy();
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <LenisContext.Provider value={{ lenis: lenisRef.current }}>
