@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
+import { useDeviceCapability } from "@/app/hooks/useDeviceCapability";
 
 interface TextScrambleProps {
   text: string;
@@ -22,6 +23,7 @@ export default function TextScramble({
   duration = 1000,
   characters = "!<>-_\\/[]{}=+*^?#________",
 }: TextScrambleProps) {
+  const { prefersReducedMotion } = useDeviceCapability();
   const [displayText, setDisplayText] = useState(text);
   const [isScrambling, setIsScrambling] = useState(false);
   const frameRef = useRef<number | null>(null);
@@ -35,6 +37,11 @@ export default function TextScramble({
   );
 
   const scramble = useCallback(() => {
+    // Skip animation when reduced motion is preferred
+    if (prefersReducedMotion) {
+      setDisplayText(text);
+      return;
+    }
     if (isScrambling) return;
     setIsScrambling(true);
 
@@ -91,7 +98,7 @@ export default function TextScramble({
     };
 
     update();
-  }, [displayText, text, randomChar, isScrambling]);
+  }, [displayText, text, randomChar, isScrambling, prefersReducedMotion]);
 
   useEffect(() => {
     if (autoPlay) {
