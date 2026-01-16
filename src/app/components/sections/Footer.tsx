@@ -11,8 +11,10 @@ const navLinks = [
 ];
 
 const legalLinks = [
-  { href: "/privacy", label: "Privacy Policy" },
   { href: "/terms", label: "Terms of Service" },
+  { href: "/prohibited-use", label: "Prohibited Use Policy" },
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/job-applicant-privacy", label: "Job Applicant Privacy Policy" },
 ];
 
 const currentYear = new Date().getFullYear();
