@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck } from "lucide-react";
 import ContactForm from "../form/ContactForm";
 import TextScramble from "../effects/TextScramble";
 import { MorphingBlob } from "../effects/FloatingShapes";
@@ -96,32 +95,6 @@ export default function FinalCTA() {
           transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <ContactForm />
-        </motion.div>
-
-        {/* Guarantee Section - TLP Framework */}
-        <motion.div
-          className="max-w-2xl mx-auto mt-10 p-6 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-secondary)]/50"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-        >
-          <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-[var(--accent-primary)]/15 flex items-center justify-center">
-              <ShieldCheck className="w-6 h-6 text-[var(--accent-primary)]" />
-            </div>
-            <div>
-              <h4 className="font-bold text-[var(--text-primary)] mb-2">
-                Pilot Project Guarantee
-              </h4>
-              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                Start with a pilot project to validate fit. If you&apos;re not
-                completely satisfied with the quality and collaboration within
-                the first 30 days, we&apos;ll refund 100% of your pilot fee. No
-                questions asked.
-              </p>
-            </div>
-          </div>
         </motion.div>
 
         {/* Bottom decorative line */}

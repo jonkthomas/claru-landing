@@ -2,26 +2,34 @@
 
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { Quote, TrendingUp, Target, Briefcase } from "lucide-react";
+import { TrendingUp, Target, Briefcase } from "lucide-react";
 import TextScramble, { GlitchText } from "../effects/TextScramble";
-import { RevealOnScroll, ParallaxSection } from "../effects/ScrollAnimations";
+import { RevealOnScroll } from "../effects/ScrollAnimations";
 
 const testimonials = [
   {
     quote:
-      "We were building video generation models and hit a wall. Traditional data vendors gave us inconsistent quality and zero context. Claru dropped a squad of visual effects experts into our Slack channel. They understood our architecture, joined our syncs, and helped us ship features we'd been stuck on for months. They're not a vendor - they're part of the team now.",
-    author: "Naeem Talukdar",
-    title: "CEO",
-    company: "Moonvalley",
-    featured: true,
+      "We were building video generation models and hit a wall. Traditional data vendors gave us inconsistent quality and zero context. Claru embedded a squad of visual effects experts into our Slack. They understood our architecture, joined our syncs, and helped us ship features we'd been stuck on for months.",
+    author: "Founder & CEO",
+    backing: "Khosla Ventures & General Catalyst backed startup",
   },
   {
     quote:
       "The difference is night and day. With our previous vendor, we'd wait a week for labeled data, then spend another week fixing errors. With Claru, our experts are in our standup every morning. When there's an edge case, we debug it together in real-time.",
     author: "Senior Research Scientist",
-    title: "",
-    company: "Reka AI",
-    featured: false,
+    backing: "NVIDIA backed VLM lab",
+  },
+  {
+    quote:
+      "Most annotation vendors give you a portal and a prayer. Claru gave us a dedicated team who actually understood what we were building. They caught edge cases our internal QA missed and helped us define annotation guidelines that scaled.",
+    author: "Principal Research Engineer",
+    backing: "Bessemer Ventures backed company",
+  },
+  {
+    quote:
+      "We needed to go from zero training data to production-ready dataset in 8 weeks. Claru's team worked like they were on our cap table. They didn't just label data—they helped us think through what data we actually needed.",
+    author: "Founder",
+    backing: "YC backed company, Series A",
   },
 ];
 
@@ -132,16 +140,14 @@ export default function Testimonials() {
           </div>
         </RevealOnScroll>
 
-        {/* Testimonials */}
-        <div className="space-y-8 max-w-4xl mx-auto">
+        {/* Testimonials - Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-5xl mx-auto">
           {testimonials.map((testimonial, index) => (
-            <ParallaxSection
-              key={testimonial.author}
-              speed={0.05 * (index + 1)}
-              direction="up"
-            >
-              <TestimonialCard testimonial={testimonial} index={index} />
-            </ParallaxSection>
+            <TestimonialCard
+              key={testimonial.author + index}
+              testimonial={testimonial}
+              index={index}
+            />
           ))}
         </div>
       </div>
@@ -295,30 +301,23 @@ function TestimonialCard({ testimonial, index }: TestimonialCardProps) {
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{
-        duration: 0.8,
-        delay: index * 0.2,
+        duration: 0.6,
+        delay: index * 0.1,
         ease: [0.16, 1, 0.3, 1],
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      className="h-full"
     >
       <motion.div
-        className={`relative p-8 md:p-10 lg:p-12 overflow-hidden ${
-          testimonial.featured
-            ? "border border-[var(--accent-primary)]/30 bg-gradient-to-br from-[var(--bg-secondary)] to-[var(--bg-tertiary)]"
-            : "border border-[var(--border-subtle)] bg-[var(--bg-secondary)]"
-        }`}
+        className="relative p-6 md:p-8 overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-secondary)] h-full flex flex-col"
         whileHover={{
-          borderColor: testimonial.featured
-            ? "var(--accent-primary)"
-            : "var(--border-medium)",
-          boxShadow: testimonial.featured
-            ? "0 0 60px rgba(146, 176, 144, 0.15)"
-            : "none",
+          borderColor: "var(--accent-primary)",
+          boxShadow: "0 0 40px rgba(146, 176, 144, 0.1)",
         }}
       >
         {/* Scan line effect */}
@@ -329,122 +328,60 @@ function TestimonialCard({ testimonial, index }: TestimonialCardProps) {
           transition={{ duration: 0.6 }}
         />
 
-        {/* Quote decoration with animation */}
-        <motion.div
-          className="absolute -top-4 left-8 md:left-10"
-          animate={{ y: isHovered ? -2 : 0, scale: isHovered ? 1.1 : 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <div
-            className={`w-8 h-8 flex items-center justify-center ${
-              testimonial.featured
-                ? "bg-[var(--accent-primary)]"
-                : "bg-[var(--bg-elevated)]"
-            }`}
-          >
-            <Quote
-              className={`w-4 h-4 ${
-                testimonial.featured
-                  ? "text-[var(--bg-primary)]"
-                  : "text-[var(--text-tertiary)]"
-              }`}
-            />
-          </div>
-        </motion.div>
+        {/* Large quotation mark - visible */}
+        <div className="mb-4">
+          <span className="text-4xl md:text-5xl font-serif text-[var(--accent-primary)] opacity-60 leading-none">
+            &ldquo;
+          </span>
+        </div>
 
-        {/* ASCII Quote Marks with animation */}
-        <motion.pre
-          className="absolute top-6 right-8 font-mono text-[40px] text-[var(--border-subtle)] leading-none select-none"
-          animate={{
-            opacity: isHovered ? 0.5 : 0.2,
-            scale: isHovered ? 1.1 : 1,
-          }}
-          transition={{ duration: 0.3 }}
-        >
-          {`"`}
-        </motion.pre>
-
-        {/* Quote Text with typewriter-like reveal */}
-        <blockquote
-          className={`text-lg md:text-xl leading-relaxed mb-8 relative z-10 ${
-            testimonial.featured
-              ? "text-[var(--text-primary)]"
-              : "text-[var(--text-secondary)]"
-          }`}
-        >
-          &ldquo;{testimonial.quote}&rdquo;
+        {/* Quote Text */}
+        <blockquote className="text-base md:text-lg leading-relaxed mb-6 text-[var(--text-secondary)] flex-grow">
+          {testimonial.quote}
         </blockquote>
 
         {/* Attribution */}
-        <div className="flex items-center gap-4 relative z-10">
-          {/* Avatar with animation */}
+        <div className="flex items-center gap-3 pt-4 border-t border-[var(--border-subtle)]">
+          {/* Avatar */}
           <motion.div
-            className={`w-12 h-12 flex items-center justify-center font-mono text-sm ${
-              testimonial.featured
-                ? "bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]"
-                : "bg-[var(--bg-elevated)] text-[var(--text-tertiary)]"
-            }`}
+            className="w-10 h-10 flex items-center justify-center font-mono text-xs bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]"
             animate={{
               scale: isHovered ? 1.05 : 1,
-              borderColor: isHovered ? "var(--accent-primary)" : "transparent",
             }}
             transition={{ duration: 0.3 }}
-            style={{ border: "1px solid transparent" }}
           >
             {testimonial.author
               .split(" ")
               .map((n) => n[0])
-              .join("")}
+              .join("")
+              .slice(0, 2)}
           </motion.div>
 
-          <div>
-            <p
-              className={`font-semibold ${
-                testimonial.featured
-                  ? "text-[var(--text-primary)]"
-                  : "text-[var(--text-secondary)]"
-              }`}
-            >
+          <div className="flex-1 min-w-0">
+            <p className="font-medium text-[var(--text-primary)] text-sm">
               {isHovered ? (
                 <TextScramble text={testimonial.author} autoPlay delay={0} />
               ) : (
                 testimonial.author
               )}
             </p>
-            <p className="text-sm text-[var(--text-tertiary)] font-mono">
-              {testimonial.title ? `${testimonial.title}, ` : ""}
-              {testimonial.company}
+            <p className="text-xs text-[var(--text-tertiary)] font-mono truncate">
+              {testimonial.backing}
             </p>
           </div>
         </div>
 
-        {/* Featured badge with animation */}
-        {testimonial.featured && (
-          <motion.div
-            className="absolute top-4 right-4"
-            animate={{
-              y: isHovered ? 0 : 0,
-              opacity: isHovered ? 1 : 0.8,
-            }}
-            transition={{ duration: 0.3 }}
-          >
-            <span className="font-mono text-xs text-[var(--accent-primary)] bg-[var(--accent-primary)]/10 px-2 py-1 border border-[var(--accent-primary)]/20">
-              FEATURED
-            </span>
-          </motion.div>
-        )}
-
-        {/* Corner decorations */}
-        <div className="absolute bottom-4 right-4 opacity-20">
+        {/* Corner decoration */}
+        <div className="absolute bottom-3 right-3 opacity-20">
           <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
             fill="none"
             className="text-[var(--accent-primary)]"
           >
             <path
-              d="M0 24L24 0M8 24L24 8M16 24L24 16"
+              d="M0 16L16 0M5 16L16 5M10 16L16 10"
               stroke="currentColor"
               strokeWidth="1"
             />
