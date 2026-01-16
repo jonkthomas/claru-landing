@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      background: #050505;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Subtle grid pattern */
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(146, 176, 144, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(146, 176, 144, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Vignette */
+    .vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%);
+    }
+
+    /* Content container */
+    .content {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+    }
+
+    /* Actual logo image */
+    .logo-img {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 32px;
+    }
+
+    /* Brand name */
+    .brand {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 72px;
+      font-weight: 700;
+      letter-spacing: 16px;
+      color: #e8e8e8;
+      margin-bottom: 24px;
+      text-shadow: 0 0 30px rgba(146, 176, 144, 0.3);
+    }
+
+    /* Tagline */
+    .tagline {
+      font-size: 28px;
+      font-weight: 400;
+      color: #92B090;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    /* Subtitle */
+    .subtitle {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 16px;
+      color: #666;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Corner decorations */
+    .corner {
+      position: absolute;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10px;
+      color: rgba(146, 176, 144, 0.3);
+      white-space: pre;
+      line-height: 1.4;
+    }
+
+    .corner.top-left {
+      top: 30px;
+      left: 30px;
+    }
+
+    .corner.bottom-right {
+      bottom: 30px;
+      right: 30px;
+      text-align: right;
+    }
+
+    /* Accent lines */
+    .accent-line {
+      position: absolute;
+      background: linear-gradient(90deg, transparent, #92B090, transparent);
+      height: 1px;
+      opacity: 0.3;
+    }
+
+    .accent-line.top {
+      top: 80px;
+      left: 100px;
+      right: 100px;
+    }
+
+    .accent-line.bottom {
+      bottom: 80px;
+      left: 100px;
+      right: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="vignette"></div>
+
+  <div class="accent-line top"></div>
+  <div class="accent-line bottom"></div>
+
+  <div class="corner top-left">┌─ CLARU ─────────┐
+│ Visual AI Data  │
+│ v2.0            │</div>
+
+  <div class="corner bottom-right">────────────────┐
+   claru.ai       │
+   2026           ┘</div>
+
+  <div class="content">
+    <img src="../public/images/logo-animated-small.gif" alt="Claru Logo" class="logo-img">
+    <div class="brand">CLARU</div>
+    <div class="tagline">From Raw Footage to Data Moat</div>
+    <div class="subtitle">Expert Human Intelligence for Visual AI</div>
+  </div>
+</body>
+</html>
