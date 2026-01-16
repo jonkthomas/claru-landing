@@ -406,3 +406,257 @@ h1, h2, h3, h4, h5, h6 {
   vertical-align: text-bottom;
 }
 
+/* ============================================
+   ASCII-INSPIRED CTA BUTTON EFFECTS
+   ============================================ */
+
+/* Animated gradient sweep */
+@keyframes ascii-gradient-sweep {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Scanline effect */
+@keyframes scanline-move {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Matrix rain effect */
+@keyframes matrix-fall {
+  0% {
+    transform: translateY(-100%) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%) translateX(0);
+    opacity: 0;
+  }
+}
+
+/* Pulse glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--accent-glow-strong), 0 0 60px var(--accent-glow);
+  }
+}
+
+/* CTA Button with ASCII gradient effect */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--bg-primary);
+  background: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ASCII gradient overlay */
+.btn-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 25%,
+    rgba(168, 196, 166, 0.5) 50%,
+    rgba(255, 255, 255, 0.3) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  transform: translateX(-100%);
+  transition: transform 0s;
+  z-index: 1;
+}
+
+/* Scanline overlay */
+.btn-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity var(--duration-normal);
+}
+
+.btn-cta:hover {
+  background: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 20px var(--accent-glow),
+    0 0 40px var(--accent-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-cta:hover::before {
+  transform: translateX(100%);
+  transition: transform 0.8s var(--ease-out-expo);
+}
+
+.btn-cta:hover::after {
+  opacity: 1;
+}
+
+.btn-cta:active {
+  transform: translateY(0);
+}
+
+/* Variant: Matrix style with more dramatic effect */
+.btn-cta-matrix {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--bg-primary);
+  background:
+    linear-gradient(135deg, var(--accent-tertiary) 0%, var(--accent-primary) 50%, var(--accent-secondary) 100%);
+  background-size: 200% 200%;
+  border: 1px solid var(--accent-primary);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-cta-matrix::before {
+  content: '░▒▓█▓▒░';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  letter-spacing: 0.5em;
+  color: rgba(255, 255, 255, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0s;
+}
+
+.btn-cta-matrix:hover {
+  background-position: 100% 100%;
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 20px var(--accent-glow-strong),
+    0 0 40px var(--accent-glow),
+    0 8px 32px rgba(0, 0, 0, 0.3);
+  border-color: var(--accent-secondary);
+}
+
+.btn-cta-matrix:hover::before {
+  transform: translateX(100%);
+  transition: transform 1.2s linear;
+}
+
+/* Variant: Glitch effect - subtle text chromatic aberration */
+.btn-cta-glitch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--bg-primary);
+  background: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-cta-glitch:hover {
+  background: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+/* Subtle text chromatic aberration on hover */
+.btn-cta-glitch:hover > span {
+  text-shadow:
+    -1px 0 0 rgba(255, 80, 80, 0.6),
+    1px 0 0 rgba(80, 255, 180, 0.6);
+  animation: text-glitch 0.3s ease-in-out;
+}
+
+@keyframes text-glitch {
+  0%, 100% {
+    text-shadow:
+      -1px 0 0 rgba(255, 80, 80, 0.6),
+      1px 0 0 rgba(80, 255, 180, 0.6);
+  }
+  25% {
+    text-shadow:
+      -2px 0 0 rgba(255, 80, 80, 0.8),
+      2px 0 0 rgba(80, 255, 180, 0.8);
+  }
+  50% {
+    text-shadow:
+      1px 0 0 rgba(255, 80, 80, 0.5),
+      -1px 0 0 rgba(80, 255, 180, 0.5);
+  }
+  75% {
+    text-shadow:
+      -1px 0 0 rgba(255, 80, 80, 0.7),
+      1px 0 0 rgba(80, 255, 180, 0.7);
+  }
+}
+
+/* Secondary button with subtle text glitch on hover */
+.btn-glitch-text:hover > span {
+  text-shadow:
+    -1px 0 0 rgba(255, 80, 80, 0.5),
+    1px 0 0 rgba(80, 255, 180, 0.5);
+  animation: text-glitch 0.3s ease-in-out;
+}
+

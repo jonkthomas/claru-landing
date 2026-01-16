@@ -33,17 +33,14 @@ const FinalCTA = dynamic(() => import("./components/sections/FinalCTA"), {
   loading: () => <SectionSkeleton minHeight="min-h-[50vh]" />,
 });
 
-// Dynamic imports for effects and providers
-const LenisProvider = dynamic(
-  () => import("./components/providers/LenisProvider"),
+const AnimatedLogo = dynamic(
+  () => import("./components/sections/AnimatedLogo"),
   { ssr: false },
 );
 
-const CustomCursor = dynamic(
-  () =>
-    import("./components/effects/MagneticCursor").then(
-      (mod) => mod.CustomCursor,
-    ),
+// Dynamic imports for effects and providers
+const LenisProvider = dynamic(
+  () => import("./components/providers/LenisProvider"),
   { ssr: false },
 );
 
@@ -66,11 +63,6 @@ export default function Home() {
       {/* Canvas ASCII animation - robots on desktop, matrix rain on mobile */}
       <HeroBackground />
 
-      {/* Custom cursor - desktop only */}
-      <div className="hidden lg:block">
-        <CustomCursor />
-      </div>
-
       {/* Noise overlay for texture */}
       <div className="noise-overlay-animated" />
 
@@ -85,6 +77,7 @@ export default function Home() {
         <Capabilities />
         <Testimonials />
         <FinalCTA />
+        <AnimatedLogo />
       </main>
 
       {/* Footer */}

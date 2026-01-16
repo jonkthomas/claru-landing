@@ -479,7 +479,7 @@ export default function AcquirePage() {
               Contact
             </Link>
           </nav>
-          <Button href="/#contact" size="sm">
+          <Button href="/#contact" variant="cta-glitch" size="sm">
             Get Started
           </Button>
         </div>
@@ -552,7 +552,7 @@ export default function AcquirePage() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button href="#contact" size="lg">
+              <Button href="#contact" variant="cta-glitch" size="lg">
                 Start Your Data Partnership <ArrowRight className="w-4 h-4" />
               </Button>
               <Button href="#capabilities" variant="secondary" size="lg">
@@ -1264,7 +1264,7 @@ export default function AcquirePage() {
               pipeline that delivers the quality, scale, and provenance your
               models need.
             </p>
-            <Button href="/#contact" size="lg">
+            <Button href="/#contact" variant="cta-glitch" size="lg">
               Discuss Your Data Requirements <ArrowRight className="w-4 h-4" />
             </Button>
           </motion.div>

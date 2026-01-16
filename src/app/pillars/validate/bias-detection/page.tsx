@@ -256,7 +256,7 @@ export default function BiasDetectionPage() {
               Contact
             </Link>
           </nav>
-          <Button href="/#contact" size="sm">
+          <Button href="/#contact" variant="cta-glitch" size="sm">
             Get Started
           </Button>
         </div>
@@ -333,7 +333,7 @@ export default function BiasDetectionPage() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button href="#contact" size="lg">
+              <Button href="#contact" variant="cta-glitch" size="lg">
                 Start Bias Audit <ArrowRight className="w-4 h-4" />
               </Button>
               <Button href="#how-it-works" variant="secondary" size="lg">
@@ -886,7 +886,7 @@ export default function BiasDetectionPage() {
               regulatory requirements.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button href="/#contact" size="lg">
+              <Button href="/#contact" variant="cta-glitch" size="lg">
                 Start Bias Audit <ArrowRight className="w-4 h-4" />
               </Button>
               <Button

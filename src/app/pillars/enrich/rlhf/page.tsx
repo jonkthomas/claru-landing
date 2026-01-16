@@ -240,7 +240,7 @@ export default function RLHFPage() {
               Contact
             </Link>
           </nav>
-          <Button href="/#contact" size="sm">
+          <Button href="/#contact" variant="cta-glitch" size="sm">
             Get Started
           </Button>
         </div>
@@ -313,7 +313,7 @@ export default function RLHFPage() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button href="/#contact" size="lg">
+              <Button href="/#contact" variant="cta-glitch" size="lg">
                 Discuss RLHF Requirements <ArrowRight className="w-4 h-4" />
               </Button>
               <Button href="/pillars/enrich" variant="secondary" size="lg">
@@ -952,7 +952,7 @@ export default function RLHFPage() {
               deliver preference data that moves your alignment metrics.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button href="/#contact" size="lg">
+              <Button href="/#contact" variant="cta-glitch" size="lg">
                 Discuss RLHF Requirements <ArrowRight className="w-4 h-4" />
               </Button>
               <Button

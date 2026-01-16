@@ -140,7 +140,7 @@ export default function Capabilities() {
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          <Button href="#contact" size="md">
+          <Button href="#contact" variant="cta-glitch" size="md">
             Discuss Your Visual AI Needs →
           </Button>
         </motion.div>

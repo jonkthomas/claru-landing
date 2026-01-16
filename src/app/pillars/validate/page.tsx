@@ -467,7 +467,7 @@ export default function ValidatePage() {
               Contact
             </Link>
           </nav>
-          <Button href="/#contact" size="sm">
+          <Button href="/#contact" variant="cta-glitch" size="sm">
             Get Started
           </Button>
         </div>
@@ -541,7 +541,7 @@ export default function ValidatePage() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button href="#contact" size="lg">
+              <Button href="#contact" variant="cta-glitch" size="lg">
                 Start Your Validation <ArrowRight className="w-4 h-4" />
               </Button>
               <Button href="#capabilities" variant="secondary" size="lg">
@@ -1253,7 +1253,7 @@ export default function ValidatePage() {
               Tell us what you&apos;re building. We&apos;ll scope a validation
               strategy that catches problems before your users—or regulators—do.
             </p>
-            <Button href="/#contact" size="lg">
+            <Button href="/#contact" variant="cta-glitch" size="lg">
               Discuss Your Validation Needs <ArrowRight className="w-4 h-4" />
             </Button>
           </motion.div>

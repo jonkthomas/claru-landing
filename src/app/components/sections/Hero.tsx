@@ -103,9 +103,9 @@ export default function Hero() {
           >
             <span className="inline-block">From Raw Footage</span>
             <br className="hidden sm:block" />
-            <span className="inline-block">to</span>
+            <span className="inline-block">to</span>{" "}
             <TextScramble
-              text=" Data Moat"
+              text="Data Moat"
               className="inline-block text-[var(--accent-secondary)] italic"
               scrambleOnHover={true}
               autoPlay={true}
@@ -139,7 +139,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-            <Button href="#contact" size="lg">
+            <Button href="#contact" variant="cta-glitch" size="lg">
               Book a Consultation — Limited Q1 Capacity
             </Button>
             <Button href="#services" variant="secondary" size="lg">

@@ -295,7 +295,7 @@ export default function FourPillars() {
             <span className="text-[var(--accent-primary)]">*</span> End-to-end
             data partnership tailored to your model&apos;s needs
           </p>
-          <Button href="#contact" size="md">
+          <Button href="#contact" variant="cta-glitch" size="md">
             Start Your Data Partnership →
           </Button>
         </motion.div>

@@ -128,7 +128,7 @@ export default function ProblemAgitation() {
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            <Button href="#contact" size="md">
+            <Button href="#contact" variant="cta-glitch" size="md">
               See How We Solve It →
             </Button>
           </motion.div>

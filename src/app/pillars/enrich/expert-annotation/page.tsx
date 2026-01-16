@@ -418,7 +418,7 @@ export default function ExpertAnnotationPage() {
               Contact
             </Link>
           </nav>
-          <Button href="/#contact" size="sm">
+          <Button href="/#contact" variant="cta-glitch" size="sm">
             Get Started
           </Button>
         </div>
@@ -492,7 +492,7 @@ export default function ExpertAnnotationPage() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button href="/#contact" size="lg">
+              <Button href="/#contact" variant="cta-glitch" size="lg">
                 Discuss Expert Requirements <ArrowRight className="w-4 h-4" />
               </Button>
               <Button href="/pillars/enrich" variant="secondary" size="lg">
@@ -1143,7 +1143,7 @@ export default function ExpertAnnotationPage() {
               produce accurate, consistent labels.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button href="/#contact" size="lg">
+              <Button href="/#contact" variant="cta-glitch" size="lg">
                 Discuss Expert Requirements <ArrowRight className="w-4 h-4" />
               </Button>
               <Button href="/pillars/enrich/rlhf" variant="secondary" size="lg">

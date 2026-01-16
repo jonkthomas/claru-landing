@@ -105,7 +105,7 @@ export default function Header() {
                   <span className="absolute -bottom-1 left-0 w-0 h-px bg-[var(--text-primary)] transition-all duration-300 group-hover:w-full" />
                 </a>
               ))}
-              <Button href="#contact" size="sm">
+              <Button href="#contact" variant="cta-glitch" size="sm">
                 Book a Consultation
               </Button>
             </nav>
@@ -152,40 +152,6 @@ export default function Header() {
             transition={{ duration: 0.3 }}
           >
             <div className="flex flex-col items-center justify-center h-full gap-6 py-20 overflow-y-auto">
-              {/* Services Section */}
-              <motion.div
-                className="text-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-              >
-                <span className="text-xs text-[var(--text-tertiary)] uppercase tracking-wider">
-                  Services
-                </span>
-              </motion.div>
-              {pillarLinks.map((pillar, index) => (
-                <Link
-                  key={pillar.href}
-                  href={pillar.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <motion.div
-                    className="text-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 20 }}
-                    transition={{ delay: index * 0.05 }}
-                  >
-                    <span className="text-xl text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors">
-                      {pillar.label}
-                    </span>
-                    <span className="block text-xs text-[var(--text-tertiary)]">
-                      {pillar.description}
-                    </span>
-                  </motion.div>
-                </Link>
-              ))}
-              <div className="w-12 h-px bg-[var(--border-subtle)] my-2" />
               {navLinks.map((link, index) => (
                 <motion.a
                   key={link.href}
@@ -194,7 +160,7 @@ export default function Header() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
-                  transition={{ delay: (index + 4) * 0.05 }}
+                  transition={{ delay: index * 0.05 }}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}

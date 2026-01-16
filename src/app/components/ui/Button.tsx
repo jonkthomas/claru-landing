@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 
 interface ButtonProps {
   children: ReactNode;
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "secondary" | "ghost" | "cta" | "cta-glitch";
   size?: "sm" | "md" | "lg";
   className?: string;
   onClick?: () => void;
@@ -24,6 +24,37 @@ export default function Button({
   disabled = false,
   type = "button",
 }: ButtonProps) {
+  // CTA variants use CSS classes from globals.css for ASCII-inspired effects
+  if (variant === "cta" || variant === "cta-glitch") {
+    const ctaSizeClasses = {
+      sm: "!px-5 !py-2.5 !text-sm",
+      md: "!px-6 !py-3 !text-sm",
+      lg: "!px-8 !py-4 !text-base",
+    };
+
+    const baseClass = variant === "cta-glitch" ? "btn-cta-glitch" : "btn-cta";
+    const ctaClasses = `${baseClass} ${ctaSizeClasses[size]} ${className}`;
+
+    if (href) {
+      return (
+        <a href={href} className={ctaClasses}>
+          <span className="relative z-10">{children}</span>
+        </a>
+      );
+    }
+
+    return (
+      <button
+        type={type}
+        className={ctaClasses}
+        onClick={onClick}
+        disabled={disabled}
+      >
+        <span className="relative z-10">{children}</span>
+      </button>
+    );
+  }
+
   const baseClasses =
     "inline-flex items-center justify-center gap-2 font-medium transition-all duration-300 relative overflow-hidden rounded-full";
 
@@ -42,7 +73,7 @@ export default function Button({
     lg: "px-8 py-4 text-base",
   };
 
-  const allClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
+  const allClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} btn-glitch-text ${className}`;
 
   const content = (
     <>

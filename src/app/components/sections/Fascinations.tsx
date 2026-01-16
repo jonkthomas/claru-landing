@@ -166,7 +166,7 @@ export default function Fascinations() {
           <p className="text-[var(--text-secondary)] mb-6 font-mono text-sm">
             Ready to apply these insights to your project?
           </p>
-          <Button href="#contact" size="lg">
+          <Button href="#contact" variant="cta-glitch" size="lg">
             Book a Strategy Call — Limited Q1 Capacity
           </Button>
         </motion.div>

@@ -496,7 +496,7 @@ export default function PreparePage() {
               Contact
             </Link>
           </nav>
-          <Button href="/#contact" size="sm">
+          <Button href="/#contact" variant="cta-glitch" size="sm">
             Get Started
           </Button>
         </div>
@@ -572,7 +572,7 @@ export default function PreparePage() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button href="#contact" size="lg">
+              <Button href="#contact" variant="cta-glitch" size="lg">
                 Transform Your Pipeline <ArrowRight className="w-4 h-4" />
               </Button>
               <Button href="#capabilities" variant="secondary" size="lg">
@@ -1271,7 +1271,7 @@ export default function PreparePage() {
               pipeline that delivers clean, deduplicated, properly formatted
               data your models need.
             </p>
-            <Button href="/#contact" size="lg">
+            <Button href="/#contact" variant="cta-glitch" size="lg">
               Discuss Your Data Requirements <ArrowRight className="w-4 h-4" />
             </Button>
           </motion.div>

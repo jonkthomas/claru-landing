@@ -492,7 +492,7 @@ export default function EnrichPage() {
               Contact
             </Link>
           </nav>
-          <Button href="/#contact" size="sm">
+          <Button href="/#contact" variant="cta-glitch" size="sm">
             Get Started
           </Button>
         </div>
@@ -565,7 +565,7 @@ export default function EnrichPage() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button href="#contact" size="lg">
+              <Button href="#contact" variant="cta-glitch" size="lg">
                 Upgrade Your Annotation <ArrowRight className="w-4 h-4" />
               </Button>
               <Button href="#capabilities" variant="secondary" size="lg">
@@ -1275,7 +1275,7 @@ export default function EnrichPage() {
               annotators who actually understand the domain—and deliver data
               that moves your metrics.
             </p>
-            <Button href="/#contact" size="lg">
+            <Button href="/#contact" variant="cta-glitch" size="lg">
               Discuss Your Annotation Needs <ArrowRight className="w-4 h-4" />
             </Button>
           </motion.div>

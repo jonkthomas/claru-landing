@@ -225,7 +225,7 @@ export default function RedTeamingPage() {
               Contact
             </Link>
           </nav>
-          <Button href="/#contact" size="sm">
+          <Button href="/#contact" variant="cta-glitch" size="sm">
             Get Started
           </Button>
         </div>
@@ -300,7 +300,7 @@ export default function RedTeamingPage() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button href="#contact" size="lg">
+              <Button href="#contact" variant="cta-glitch" size="lg">
                 Start Red Team Assessment <ArrowRight className="w-4 h-4" />
               </Button>
               <Button href="#how-it-works" variant="secondary" size="lg">
@@ -824,7 +824,7 @@ export default function RedTeamingPage() {
               threat profile.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button href="/#contact" size="lg">
+              <Button href="/#contact" variant="cta-glitch" size="lg">
                 Start Red Team Assessment <ArrowRight className="w-4 h-4" />
               </Button>
               <Button
